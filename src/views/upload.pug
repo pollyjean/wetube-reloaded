@@ -1,7 +1,11 @@
 extends base.pug
 
 block content
+
   form(method="POST")
-    //- input(type="file" name="file", placeholder="Upload Video", value="", required)
+    if errorMessage
+      p #{errorMessage}
     input(name="title",placeholder="Title", type="text", required)
+    input(name="desc",placeholder="Description", type="text")
+    input(name="hashtags",placeholder="Hashtags, separated by comma.", type="text", required)
     input(type="submit", value="Upload Video")
