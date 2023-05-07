@@ -4,4 +4,8 @@ block content
   p=video.desc
   small=video.createdAt
   aside
-    a(href=`${video._id}/edit`) Edit Video &rarr;
+    menu
+      li
+        a(href=`${video._id}/edit`) Edit Video &rarr;
+      li
+       a(href=`${video._id}/delete`) Delete Video &rarr;
