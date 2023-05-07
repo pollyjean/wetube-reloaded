@@ -1,17 +1,7 @@
 mixin video(video)
-  div
+  article
     h4
       a(href=`/videos/${video.id}`)=video.title
-    ul
-      li(title="평점") #{video.meta.rating ? video.meta.rating : 0}/5
-      li
-        p #{video.desc}
-      li
-        each hashtag, index in video.hashtags
-          if index < (video.hashtags.length - 1)
-            span #{hashtag + ", "}
-          else
-            span #{hashtag}
-      li #{video.comments} comments.
-      li Posted #{video.createdAt}.
-      li #{video.meta.views} #{video.meta.views === 1 ? "view" : "views"}.
+    p=video.desc
+    small Posted #{video.createdAt}.
+  hr
