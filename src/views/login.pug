@@ -1,0 +1,16 @@
+extends base
+
+block content
+  form(method="POST")
+    if errorMessage
+      p=errorMessage
+    label(for="joinUsername") User Name
+    input(id="joinUsername",name="username",type="text",required,placeholder="")
+    label(for="joinPassword") Password
+    input(id="joinPassword",name="password",type="password",required,placeholder="")
+    button(type="submit") Join
+  hr
+  div
+    span Don't have an account?
+    br
+    a(href="/join") Create account &rarr;

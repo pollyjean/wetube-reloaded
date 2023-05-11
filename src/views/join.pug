@@ -2,14 +2,23 @@ extends base
 
 block content
   form(method="POST")
+    if errorMessage
+      p=errorMessage
     label(for="joinEmail") Email
     input(id="joinEmail",name="email",type="email",required,placeholder="ex) example@mail.com")
     label(for="joinUsername") User Name
     input(id="joinUsername",name="username",type="text",required,placeholder="")
     label(for="joinPassword") Password
     input(id="joinPassword",name="password",type="password",required,placeholder="")
+    label(for="confirmPassword") Confirm Password
+    input(id="confirmPassword",name="confirmPassword",type="password",required,placeholder="")
     label(for="joinName") Full Name
     input(id="joinName",name="fullname",type="text", required,placeholder="ex) John Doe")
     label(for="joinLocation") Location
     input(id="joinLocation",name="location",type="text",placeholder="ex) Seoul, Korea")
     button(type="submit") Join
+  hr
+  div
+    span Already have an account?
+    br
+    a(href="/login") Log in now &rarr;
