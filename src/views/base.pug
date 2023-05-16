@@ -11,14 +11,16 @@ html(lang="ko")
             a(href="/") Home
           li
             a(href="/videos/upload") Upload Video
-          if req.session.loggedIn === false
+          if loggedIn
+            li
+              a(href="/logout") Logout
+            li
+              a(href="/my-profile") #{user.username}'s Profile
+          else
             li
               a(href="/join") Join
             li
               a(href="/login") Login
-          if req.session.loggedIn === true
-            li
-              a(href="/logout") Logout
       form(action="/search")
         input(placeholder="Search by title",name="keyword", type="text", required, value="")
         button(type="submit") Search
