@@ -4,11 +4,11 @@ block content
   form(method="POST")
     if errorMessage
       p=errorMessage
-    label(for="joinUsername") User Name
-    input(id="joinUsername",name="username",type="text",required,placeholder="")
-    label(for="joinPassword") Password
-    input(id="joinPassword",name="password",type="password",required,placeholder="")
-    button(type="submit") Login
+    label(for="loginUsername") User Name
+    input(id="loginUsername",name="username",type="text",required,placeholder="")
+    label(for="loginPassword") Password
+    input(id="loginPassword",name="password",type="password",required,placeholder="")
+    input(type="submit" value="Login") 
     br
     a(href="/users/github/start") Continue with GitHub &rarr;
   hr
