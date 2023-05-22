@@ -2,10 +2,16 @@ extends base.pug
 
 block content
 
-  form(method="POST")
+  form(method="POST",enctype="multipart/form-data")
     if errorMessage
       p #{errorMessage}
-    input(name="title",placeholder="Title", type="text", required, maxlength=80)
-    input(name="desc",placeholder="Description", type="text", required, minlength=20, maxlength=255)
-    input(name="hashtags",placeholder="Hashtags, separated by comma.", type="text", required)
+    label(for="videoUpload") Video File Upload
+    input(name="videoUpload", id="videoUpload", type="file", required)
+    label(for="videoTitle")  Title
+    input(name="title", id="videoTitle", type="text", required, maxlength=80)
+    label(for="videoDescription") Description
+    input(name="desc", id="videoDescription", type="text", required, minlength=20, maxlength=255)
+    label(for="videoTags") Hashtags
+    input(name="hashtags", id="videoTags", type="text", required)
+    p Hashtags separated by comma (eg. funny,home,lovely)
     input(type="submit", value="Upload Video")

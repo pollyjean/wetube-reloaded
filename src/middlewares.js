@@ -1,3 +1,5 @@
+import multer from "multer";
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "weTube";
@@ -21,6 +23,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 }
 export const removeCacheMiddleware = (req, res, next) => {
-  res.set('Cache-Control', 'no-store')
-  next()
+  res.set('Cache-Control', 'no-store');
+  next();
 }
+export const uploadFilesMiddleware = multer({ dest: "uploads/" });

@@ -1,7 +1,9 @@
 extends base
 
 block content
-  form(method="POST",action="/users/edit/user-data")
+  if user.avatarUrl
+    img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="100")
+  form(method="POST",action="/users/edit/user-data",enctype="multipart/form-data")
     if errorMessage
       p=errorMessage
     label(for="editEmail") Email
@@ -12,8 +14,8 @@ block content
     input(id="editName",name="fullname",type="text", required,placeholder="ex) John Doe",value=user.fullname)
     label(for="editLocation") Location
     input(id="editLocation",name="location",type="text",placeholder="ex) Seoul, Korea",value=user.location)
-    label(for="editFile") Avatar Image Upload
-    input(id="editFile",name="avatar",type="text",placeholder="ex) Seoul, Korea",value=user.location)
+    label(for="uploadAvatar") Avatar Image Upload
+    input(id="uploadAvatar",name="avatar",type="file",accept="image/*")
     input(type="submit", value="Save Profile")
 
   if !user.socialOnly
