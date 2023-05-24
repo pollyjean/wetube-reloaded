@@ -26,4 +26,15 @@ export const removeCacheMiddleware = (req, res, next) => {
   res.set('Cache-Control', 'no-store');
   next();
 }
-export const uploadFilesMiddleware = multer({ dest: "uploads/" });
+export const uploadAvatarMiddleware = multer({
+  dest: "uploads/avatars",
+  limits: {
+    fileSize: 30000,
+  }
+});
+export const uploadVideoMiddleware = multer({
+  dest: "uploads/video",
+  limits: {
+    fileSize: 10000000,
+  }
+});

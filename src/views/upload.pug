@@ -6,12 +6,12 @@ block content
     if errorMessage
       p #{errorMessage}
     label(for="videoUpload") Video File Upload
-    input(name="videoUpload", id="videoUpload", type="file", required)
+    input(name="videoUpload",id="videoUpload",type="file",required,accept="video/*")
     label(for="videoTitle")  Title
-    input(name="title", id="videoTitle", type="text", required, maxlength=80)
+    input(name="title",id="videoTitle",type="text",required,maxlength=80)
     label(for="videoDescription") Description
-    input(name="desc", id="videoDescription", type="text", required, minlength=20, maxlength=255)
+    input(name="desc",id="videoDescription",type="text",required,minlength=20,maxlength=255)
     label(for="videoTags") Hashtags
-    input(name="hashtags", id="videoTags", type="text", required)
-    p Hashtags separated by comma (eg. funny,home,lovely)
-    input(type="submit", value="Upload Video")
+    input(name="hashtags",id="videoTags",type="text",required)
+    p Hashtags separated by comma (eg. #funny,#home,#lovely)
+    input(type="submit",value="Upload Video")

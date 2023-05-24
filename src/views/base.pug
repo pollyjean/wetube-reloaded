@@ -14,9 +14,7 @@ html(lang="ko")
             li
               a(href="/videos/upload") Upload Video
             li
-              a(href="/users/edit") Edit Profile
-            li
-              a(href="/my-profile") #{user.username}'s Profile
+              a(href=`/users/${user._id}`) #{user.username}'s Profile
             li
               a(href="/users/logout") Logout
           else
@@ -24,10 +22,6 @@ html(lang="ko")
               a(href="/join") Join
             li
               a(href="/login") Login
-      form(action="/search")
-        input(placeholder="Search by title",name="keyword", type="text", required, value="")
-        input(type="submit" value="Search")
-
     main
       block content
     include partials/footer

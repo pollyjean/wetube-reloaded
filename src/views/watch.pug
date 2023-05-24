@@ -1,6 +1,7 @@
 extends base.pug
 
 block content
+  video(src=`/${video.videoUpload}`, controls) 
   p=video.desc
   small=video.createdAt
   aside

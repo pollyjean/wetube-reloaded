@@ -124,9 +124,11 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 export const getEditUser = (req, res) => {
-  return res.render("edit-user", { pageTitle: "Edit Profile" });
+  return res.render("users/edit-user", { pageTitle: "Edit Profile" });
 };
 export const postEditUser = async (req, res) => {
+  const pageTitle = "Edit Profile";
+  const PROFILE_PUG = "users/edit-user";
   const {
     session: {
       user: { _id, avatarUrl }
@@ -141,33 +143,34 @@ export const postEditUser = async (req, res) => {
       { username, email, fullname, location, avatarUrl: file ? file.path : avatarUrl },
       { new: true },
     );
-    console.log(updatedUser);
     req.session.user = updatedUser;
     return res.redirect("/");
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).render("edit-user", { pageTitle: "Edit Profile", errorMessage: "This username/email is already taken." });
+      return res.status(400).render(PROFILE_PUG, { pageTitle, errorMessage: "This username/email is already taken." });
     }
-    return res.status(400).render("edit-user", { pageTitle: "Edit Profile", errorMessage: error });
+    return res.status(400).render(PROFILE_PUG, { pageTitle, errorMessage: error });
   }
 };
 export const postEditPassword = async (req, res) => {
-  const pageTitle = "Edit Profile"
+  const pageTitle = "Edit Profile";
+  const PROFILE_PUG = "users/edit-user";
   const {
     session: {
       user: { _id },
     },
     body: { password, password2, password3 }
   } = req;
+
   const ok = await bcrypt.compare(password, req.session.user.password);
   if (!ok) {
-    return res.status(400).render("edit-user", { pageTitle, errorMessage2: "Current password does not match." })
+    return res.status(400).render(PROFILE_PUG, { pageTitle, errorMessage2: "Current password does not match." })
   }
   if (!password2 || !password3) {
-    return res.status(400).render("edit-user", { pageTitle, errorMessage2: "Type a new password" })
+    return res.status(400).render(PROFILE_PUG, { pageTitle, errorMessage2: "Type a new password" })
   }
   if (password2 !== password3) {
-    return res.status(400).render("edit-user", { pageTitle, errorMessage2: "New password does not match." })
+    return res.status(400).render(PROFILE_PUG, { pageTitle, errorMessage2: "New password does not match." })
   }
   const savedData = await User.findById({ _id })
   savedData.password = password2;
@@ -175,4 +178,11 @@ export const postEditPassword = async (req, res) => {
   req.session.user.password = savedData.password;
   return res.redirect("/users/logout");
 }
-export const seeUser = (req, res) => res.send("User Details");
+export const viewProfile = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).render("404", { pageTitle: "User not found." });
+  }
+  return res.render("users/profile", { pageTitle: `${user.username}'s Profile`, user });
+};

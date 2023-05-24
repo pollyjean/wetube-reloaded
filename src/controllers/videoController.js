@@ -8,11 +8,14 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Video Upload" });
 };
 export const postUpload = async (req, res) => {
-  const { title, desc, hashtags } = req.body;
+  const {
+    body: { title, desc, hashtags },
+    file
+  } = req
   try {
-    await Video.create({ title, desc, hashtags: Video.formatHashtags(hashtags) });
+    await Video.create({ videoUpload: file.path, title, desc, hashtags: Video.formatHashtags(hashtags) });
   } catch (error) {
-    return res.status(400).render("upload", { pageTitle: "Video Upload", errorMessage: error._message });
+    return res.status(400).render("upload", { pageTitle: "Video Upload", errorMessage: error });
   }
   return res.redirect("/");
 };

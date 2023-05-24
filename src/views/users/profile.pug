@@ -1,0 +1,13 @@
+extends ../base
+
+block content
+  section
+    h3 Profiles
+    ul
+      li 
+        img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
+      li Email : #{user.email}
+      li Full Name : #{user.fullname}
+      li Location : #{user.location}
+    hr
+    a(href=`/users/edit`) Edit User Profile &rarr;
