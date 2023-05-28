@@ -6,3 +6,5 @@ footer
       input(placeholder="Search by title",name="keyword", type="text", required, value="")
       input(type="submit" value="Search")
   p &copy; #{new Date().getFullYear()} WeTube
+if execRefresh
+  script window.location.reload();

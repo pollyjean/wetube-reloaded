@@ -4,9 +4,9 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "weTube";
   res.locals.user = req.session.user || {};
+  res.locals.execRefresh = false;
   next();
 };
-
 export const protectorMiddleware = (req, res, next) => {
   if (req.session.loggedIn) {
     next();
@@ -22,8 +22,8 @@ export const publicOnlyMiddleware = (req, res, next) => {
     return res.redirect("/");
   }
 }
-export const removeCacheMiddleware = (req, res, next) => {
-  res.set('Cache-Control', 'no-store');
+export const refreshMiddleware = (req, res, next) => {
+  res.locals.execRefresh = true;
   next();
 }
 export const uploadAvatarMiddleware = multer({
@@ -32,6 +32,7 @@ export const uploadAvatarMiddleware = multer({
     fileSize: 30000,
   }
 });
+
 export const uploadVideoMiddleware = multer({
   dest: "uploads/video",
   limits: {

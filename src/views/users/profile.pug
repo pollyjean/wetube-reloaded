@@ -1,13 +1,27 @@
 extends ../base
+include ../mixins/video
 
 block content
   section
     h3 Profiles
-    ul
-      li 
-        img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
-      li Email : #{user.email}
-      li Full Name : #{user.fullname}
-      li Location : #{user.location}
     hr
-    a(href=`/users/edit`) Edit User Profile &rarr;
+    ul
+      if userInfo.socialOnly && userInfo.avatarUrl
+        li
+          img(src=`${userInfo.avatarUrl}`,alt="Avatar Image",width="200")
+      else if userInfo.avatarUrl
+        li
+          img(src=`/${userInfo.avatarUrl}`,alt="Avatar Image",width="200")
+      if (String(userInfo._id) === String(user._id))
+        li Email : #{userInfo.email}
+      li Full Name : #{userInfo.fullname}
+      li Location : #{userInfo.location}
+    hr
+    if userInfo.videos[0] && (String(userInfo.videos[0].owner._id) === String(user._id))
+      a(href=`/users/edit`) Edit User Profile &rarr;
+      hr
+    block content
+      each video in userInfo.videos
+        +video(video)
+      else 
+        div Sorry nothing video.

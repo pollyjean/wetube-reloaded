@@ -13,12 +13,12 @@ export const postJoin = async (req, res) => {
   }
   try {
     await User.create({ email, username, password, fullname, location });
-    res.redirect("/login");
+    return res.redirect("/login");
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).render("edit-user", { pageTitle: "Edit Profile", errorMessage: "This username/email is already taken." });
+      return res.status(400).render("join", { pageTitle: "Join", errorMessage: "This username/email is already taken." });
     }
-    return res.status(400).render("edit-user", { pageTitle: "Edit Profile", errorMessage: error });
+    return res.status(400).render("join", { pageTitle: "Join", errorMessage: error });
   }
 };
 export const getLogin = (req, res) => {
@@ -46,7 +46,7 @@ export const postLogin = async (req, res) => {
   }
   req.session.loggedIn = true;
   req.session.user = user;
-  return res.redirect("/");
+  res.redirect("/");
 };
 export const startGithubLogin = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
@@ -136,7 +136,6 @@ export const postEditUser = async (req, res) => {
     body: { username, email, fullname, location, },
     file
   } = req;
-
   try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id },
@@ -144,7 +143,7 @@ export const postEditUser = async (req, res) => {
       { new: true },
     );
     req.session.user = updatedUser;
-    return res.redirect("/");
+    return res.redirect(`/users/${_id}`);
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).render(PROFILE_PUG, { pageTitle, errorMessage: "This username/email is already taken." });
@@ -180,9 +179,9 @@ export const postEditPassword = async (req, res) => {
 }
 export const viewProfile = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
+  const userInfo = await User.findById(id).populate("videos");
+  if (!userInfo) {
     return res.status(404).render("404", { pageTitle: "User not found." });
   }
-  return res.render("users/profile", { pageTitle: `${user.username}'s Profile`, user });
+  return res.render("users/profile", { pageTitle: `${userInfo.username}'s Profile`, userInfo });
 };
