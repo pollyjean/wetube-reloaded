@@ -1,0 +1,9 @@
+.home__videoList {
+  @include flex-c;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: $pad-lg;
+  width: 100%;
+  hr { display: none }
+}

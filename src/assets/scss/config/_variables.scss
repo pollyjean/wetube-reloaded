@@ -1,6 +1,31 @@
-$fnt: system-ui, sans-serif;
-$bg: rgba(30, 31, 28, 1);
-$light: rgba(255,255,255,0.9);
-$blue: #5BC5FF;
-$red: #FF4136;
-$dark: #1B1D21;
+$fnt: "Spoqa Han Sans Neo", "Noto Sans KR", system-ui, sans-serif;
+
+$bg:#282828;
+$dark: #3C3C3C;
+$light: #EDEDED;
+$white: #fff;
+$red:#CC0000;
+
+$screen-xl: 1280px;
+$screen-lg: 1024px;
+$screen-md: 768px;
+$screen-sm: 640px;
+$pad-lg: 1.5rem;
+$pad-md: 1rem;
+$pad-sm: 0.75rem;
+
+$bdr: rgba(0,0,0,0.15);
+
+@mixin flex-c {
+  display: flex;
+  align-items: center;
+}
+
+@mixin box-shape {
+  color: $dark;
+  background-color: $light;
+  border: 2px solid $dark;
+  padding: $pad-sm $pad-lg;
+  border-radius: $pad-sm;
+  box-shadow: inset 1px 1px 1px $white, 1px 1px 1px $bg;
+}

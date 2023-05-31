@@ -1,0 +1,40 @@
+.home__videoItem {
+  @include flex-c;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+  border: 1px solid $bdr;
+  padding: $pad-sm;
+  
+  article {
+    width: 100%;
+    .home__videoTitle {
+      font-weight: bolder;
+      font-size: 1.5rem;
+      padding: $pad-md 0;
+    }
+    .home__videoDesc {
+      padding-bottom: $pad-lg;
+      font-weight: lighter;
+      letter-spacing: -0.25px;
+    }
+    .home__videoHashtags {
+      display: flex;
+      width: 100%;
+      align-items: flex-start;
+      gap: $pad-sm;
+      padding-bottom: $pad-md;
+      i {
+        font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+        font-weight: bolder;
+        font-size: 0.9rem;
+      }
+    }
+    .home_videoCreateAt {
+      width: 85%;
+      bottom: $pad-sm;
+      font-size: 0.6rem;
+    }
+  }
+}

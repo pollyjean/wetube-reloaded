@@ -1,11 +1,10 @@
 mixin video(video)
-  article
-    h4
-      a(href=`/videos/${video.id}`)=video.title
-    p=video.desc
-    div
-      each hashtag in video.hashtags
-        i=hashtag + " "
-    small Posted #{video.createdAt}.
-
+  a.home__videoItem(href=`/videos/${video.id}`)
+    article
+      h4.home__videoTitle=video.title
+      p.home__videoDesc=video.desc
+      div.home__videoHashtags
+        each hashtag in video.hashtags
+          i=hashtag + " "
+      small.home_videoCreateAt Posted #{video.createdAt}.
   hr

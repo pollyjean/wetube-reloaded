@@ -1,60 +1,99 @@
 header {
-  margin-top: 1rem;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .header__logo {
-    font-size: 2rem;
-    color: $red;
-    flex: 1 0 33%;
-    display: flex;
+  @include flex-c;
+  padding: $pad-lg 0;
+  margin-bottom: $pad-lg;
+  width:95%;
+  max-width: $screen-xl;
+  border-bottom: 1px solid $bdr;
+
+  @media (max-width:$screen-lg) {
+    max-width: $screen-md;
   }
-  h2 {
-    font-size: 1.2rem;
-    display: flex;
+  @media (max-width:$screen-md) {
+    max-width: $screen-sm;
     flex-direction: column;
     align-items: center;
-    flex: 1 0 33%;
+  }
+  @media (max-width:$screen-sm) {
+    max-width: 96%;
+  }
+  .header__logo {
+    flex: 1 1 33%;
+    h1 {
+      @include flex-c;
+      gap: 5px;
+    }
+    i {
+      font-size: 3rem;
+      color: $red;
+    }
+    span {
+      font-size: 1.8rem;
+      font-weight: bolder;
+      letter-spacing: -1px;
+      opacity: 0.9;
+    }
+  }
+  #search {
+    @include flex-c;
+    flex-direction: column;
+    padding: $pad-sm;
+    form {
+      @include flex-c;
+      position: relative;
+      width: 20rem;
+      input {
+        padding: $pad-sm $pad-lg;
+        width: 100%;
+        letter-spacing: 0.2px;
+        font-size: 0.9rem;
+        @include box-shape;
+
+        &:hover,
+        &:focus,
+        &:active {
+          box-shadow: inset -1px -1px 1px $white, inset 1px 1px 1px $bg;
+        }
+        &::placeholder {
+          color: $bdr;
+        }
+      }
+      button {
+        position: absolute;
+        right: $pad-md;
+        background-color: transparent;
+        border:0 none;
+        color: $red;
+      }
+    }
   }
   nav {
-    display: flex;
-    flex: 1 0 33%;
+    @include flex-c;
+    flex: 1 1 33%;
     flex-direction: row-reverse;
     ul {
-      display: flex;
+      @include flex-c;
       justify-content: space-around;
-      gap: 2rem;
-      font-size: 1rem;
-      line-height: 1;
-      i {
-        font-size: 1.3rem;
+      gap: $pad-lg;
+      a {
+        @include flex-c;
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        font-weight: bold;
+        line-height: 1;
+        letter-spacing: 0.5px;
+        @include box-shape;
+        transition: all ease-in-out 0.2s;
+        
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: $dark;
+          color: $light;
+          box-shadow: inset -1px -1px 1px $white, inset 1px 1px 1px $bg;
+        }
       }
     }
   }
 }
 
-#search {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 1rem 2rem;
-  form {
-    position: relative;
-    width: 20rem;
-    display: flex;
-    align-items: center;
-    input {
-      border: 2px solid $red;
-      padding: 0.5rem 2rem;
-      border-radius: 1rem;
-      width: 100%;
-    }
-    button {
-      position: absolute;
-      right: 0.5rem;
-      background-color: transparent;
-      border:0 none;
-    }
-  }
-}
