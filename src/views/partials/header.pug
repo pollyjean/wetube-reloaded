@@ -1,0 +1,28 @@
+header
+  h1.header__logo
+    a(href="/")
+        i.fab.fa-youtube
+  h2=pageTitle
+  nav
+    ul 
+      li
+       
+      if loggedIn
+        li
+          a(href="/videos/upload")
+            i.fas.fa-cloud-upload-alt
+        li
+          a(href=`/users/${user._id}`) #{user.username}'s Profile
+        li
+          a(href="/users/logout")
+            i.fas.fa-sign-out-alt
+      else
+        li
+          a(href="/join") Join
+        li
+          a(href="/login")
+            i.fas.fa-sign-in-alt
+aside#search
+  form(action="/search")
+    input(placeholder="Search by title",name="keyword", type="text", required, value="")
+    button.fas.fa-search(type="submit")

@@ -1,29 +1,14 @@
 html(lang="ko")
   head
-    title #{pageTitle} | Wetube
-    link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
+    if pageTitle
+      title #{pageTitle} | SkyTube
+    else
+      title SkyTube
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
     link(rel="stylesheet", href="/dist/css/style.css")
   body 
-    header
-      h1=pageTitle
-      nav
-        ul 
-          li
-            a(href="/") Home
-          if loggedIn
-          
-            li
-              a(href="/videos/upload") Upload Video
-            li
-              a(href=`/users/${user._id}`) #{user.username}'s Profile
-            li
-              a(href="/users/logout") Logout
-          else
-            li
-              a(href="/join") Join
-            li
-              a(href="/login") Login
+    include partials/header
     main
       block content
-    script(src="/dist/js/main.js") 
     include partials/footer
+    script(src="/dist/js/main.js") 
