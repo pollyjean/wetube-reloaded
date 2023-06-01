@@ -1,18 +1,20 @@
 extends base
 
 block content
-  form(method="POST")
+  form.form__inputPost(method="POST")
     if errorMessage
-      p=errorMessage
+      p.error__message=errorMessage
     label(for="loginUsername") User Name
-    input(id="loginUsername",name="username",type="text",required,placeholder="")
+    input(id="loginUsername",name="username",type="text",required,placeholder="Enter User Name")
     label(for="loginPassword") Password
-    input(id="loginPassword",name="password",type="password",required,placeholder="")
+    input(id="loginPassword",name="password",type="password",required,placeholder="Enter Password")
     input(type="submit" value="Login") 
     br
-    a(href="/users/github/start") Continue with GitHub &rarr;
+    a.btn__hoverLine(href="/users/github/start")
+      i.fab.fa-github
+      span  Continue with GitHub &rarr;
   hr
   div
     span Don't have an account?
-    br
-    a(href="/join") Create account &rarr;
+    div.btn__groups
+     a(href="/join") Create account &rarr;

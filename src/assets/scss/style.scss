@@ -5,8 +5,12 @@
 @import "./components/header";
 @import "./components/footer";
 @import "./components/video";
+@import "./components/common";
+@import "./components/form";
 
 @import "./screens/home";
+@import "./screens/watch";
+@import "./screens/profile";
 
 // defaults
 * {
@@ -20,7 +24,6 @@ body {
   @include flex-c;
   flex-direction: column;
   background: $light;
-  background: linear-gradient(to left, #ece9e6, #ffffff);
   color: $dark;
   font-family: $fnt;
   font-weight: normal;

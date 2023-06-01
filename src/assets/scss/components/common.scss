@@ -1,0 +1,38 @@
+.empty__message {
+  @include flex-c;
+  flex-direction: column;
+  font-size: 1rem;
+  padding: 5rem 0;
+  text-align: center;
+  width: 100%;
+}
+.error__message {
+  @include flex-c;
+  flex-direction: column;
+  font-size: 1rem;
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+  color: $red;
+  font-family: $coding;
+}
+.btn__groups {
+  @include flex-c;
+  margin: $pad-sm 0 $pad-lg;
+  justify-content: center;
+  a {
+    @include box-shape;
+  }
+}
+.btn__hoverLine {
+  &:hover,
+  &:focus,
+  &:active{
+    text-decoration: underline;
+  }
+}
+.avatar__frame {
+  img {
+    border-radius: $pad-lg;
+  }
+}

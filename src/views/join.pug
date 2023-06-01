@@ -1,24 +1,24 @@
 extends base
 
 block content
-  form(method="POST")
+  form.form__inputPost(method="POST")
     if errorMessage
-      p=errorMessage
+      p.error__message=errorMessage
     label(for="joinEmail") Email
-    input(id="joinEmail",name="email",type="email",required,placeholder="ex) example@mail.com")
+    input(id="joinEmail",name="email",type="email",required,placeholder="Enter Email")
     label(for="joinUsername") User Name
-    input(id="joinUsername",name="username",type="text",required,placeholder="")
+    input(id="joinUsername",name="username",type="text",required,placeholder="Enter User Name")
     label(for="joinPassword") Password
-    input(id="joinPassword",name="password",type="password",required,placeholder="")
+    input(id="joinPassword",name="password",type="password",required,placeholder="Enter Password")
     label(for="confirmPassword") Confirm Password
-    input(id="confirmPassword",name="confirmPassword",type="password",required,placeholder="")
+    input(id="confirmPassword",name="confirmPassword",type="password",required,placeholder="Retype and Enter Password")
     label(for="joinName") Full Name
-    input(id="joinName",name="fullname",type="text", required,placeholder="ex) John Doe")
+    input(id="joinName",name="fullname",type="text", required,placeholder="Enter Full Name")
     label(for="joinLocation") Location
-    input(id="joinLocation",name="location",type="text",placeholder="ex) Seoul, Korea")
+    input(id="joinLocation",name="location",type="text",placeholder="Enter Location")
     input(type="submit" value="Join")
   hr
   div
     span Already have an account?
-    br
-    a(href="/login") Log in now &rarr;
+    div.btn__groups
+      a(href="/login") Log in now &rarr;

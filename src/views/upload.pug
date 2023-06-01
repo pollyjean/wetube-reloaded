@@ -2,16 +2,16 @@ extends base.pug
 
 block content
 
-  form(method="POST",enctype="multipart/form-data")
+  form.form__inputPost(method="POST",enctype="multipart/form-data")
     if errorMessage
       p #{errorMessage}
     label(for="videoUpload") Video File Upload
     input(name="videoUpload",id="videoUpload",type="file",required,accept="video/*")
     label(for="videoTitle")  Title
-    input(name="title",id="videoTitle",type="text",required,maxlength=80)
+    input(name="title",id="videoTitle",type="text",required,maxlength=80,placeholder="Enter Video Title")
     label(for="videoDescription") Description
-    input(name="desc",id="videoDescription",type="text",required,minlength=20,maxlength=255)
+    input(name="desc",id="videoDescription",type="text",required,minlength=20,maxlength=255,placeholder="Enter Video Description")
     label(for="videoTags") Hashtags
-    input(name="hashtags",id="videoTags",type="text",required)
-    p Hashtags separated by comma (eg. #funny,#home,#lovely)
+    input(name="hashtags",id="videoTags",type="text",required,placeholder="Enter Tags")
+    p.form__comment Hashtags separated by comma (eg. #funny,#home,#lovely)
     input(type="submit",value="Upload Video")

@@ -3,19 +3,23 @@
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  width: 100%;
-  border: 1px solid $bdr;
-  padding: $pad-sm;
-  
+  width: 100%;  
   article {
     width: 100%;
+    .home__videoThumb {
+      height: 140px;
+      width: 100%;
+      background: $white;
+      border-radius: $pad-sm;
+    }
     .home__videoTitle {
       font-weight: bolder;
-      font-size: 1.5rem;
-      padding: $pad-md 0;
+      font-size: 1rem;
+      padding: $pad-sm 0;
     }
     .home__videoDesc {
       padding-bottom: $pad-lg;
+      font-size: 0.85rem;
       font-weight: lighter;
       letter-spacing: -0.25px;
     }
@@ -24,14 +28,13 @@
       width: 100%;
       align-items: flex-start;
       gap: $pad-sm;
-      padding-bottom: $pad-md;
+      padding-bottom: $pad-sm;
       i {
-        font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-        font-weight: bolder;
-        font-size: 0.9rem;
+        font-family: $coding;
+        font-size: 0.85rem;
       }
     }
-    .home_videoCreateAt {
+    .home__videoMeta {
       width: 85%;
       bottom: $pad-sm;
       font-size: 0.6rem;

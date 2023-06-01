@@ -1,6 +1,23 @@
 .footer {
   text-align: center;
-  margin-top: 4rem;
+  padding-top: 2rem;
+  margin-top: 2rem;
   font-size: 0.9rem;
   font-weight: lighter;
+  width:100%;
+  @media (max-width:$screen-lg) {
+    max-width: 100%;
+    padding: $pad-sm;
+  }
+  @media (max-width:$screen-md) {
+    max-width: 100%;
+    padding: $pad-sm;
+  }
+  @media (max-width:$screen-sm) {
+    max-width: 100%;
+    padding: $pad-sm;
+  }
+  p {
+    margin-bottom: $pad-md;
+  }
 }

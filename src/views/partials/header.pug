@@ -2,7 +2,6 @@ header
   a(href="/").header__logo
     h1
       i.fab.fa-youtube
-      span SkyTube
   div#search
     form(action="/search")
       input(placeholder="Search by title",name="keyword", type="text", required, value="")
@@ -15,7 +14,15 @@ header
           a(href="/videos/upload")
             i.fas.fa-cloud-upload-alt
         li
-          a(href=`/users/${user._id}`) #{user.username}'s Profile
+          if user.socialOnly && user.avatarUrl
+            a(href=`/users/${user._id}`,title=`${user.username}'s profile`)
+              img(src=`${user.avatarUrl}`,alt="Avatar Image")
+          else if user.avatarUrl
+            a(href=`/users/${user._id}`,title=`${user.username}'s profile`)
+              img(src=`/${user.avatarUrl}`,alt="Avatar Image")
+          else
+            a(href=`/users/${user._id}`,title=`${user.username}'s profile`)
+              i.fas.fa-user-circle
         li
           a(href="/users/logout") Logout
       else
