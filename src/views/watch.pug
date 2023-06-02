@@ -2,16 +2,34 @@ extends base.pug
 
 block content
   section.watch__detail
-    video(src=`/${video.videoUpload}`, controls)
-    div.watch__detailText
-      p=video.desc
-      br
-      small Uploaded by 
-        a(href=`/users/${video.owner._id}`)=video.owner.username
-      br
-      small=video.createdAt
-      br
-      if String(video.owner._id) === String(user._id)
-        a(href=`${video._id}/edit`) Edit Video &rarr;
-        br
-        a(href=`${video._id}/delete`) Delete Video &rarr;
+    figure#video__container
+      video(src=`/${video.videoUpload}`, controls)
+      div#video__controller
+        button#play(aria-label="Play",aria-pressed="false")
+          i.fas.fa-play
+        button#mute(aria-label="Mute",aria-pressed="false")
+          i.fas.fa-volume-up
+        input#volume(type="range", name="volume",aria-label="Volume",min="0",max="1",step="0.1",value="0.5")
+        span.timeStamp 
+          i#timeDuration 00:00
+          | / 
+          i#timeTotal 00:00
+        input#timeline(type="range", name="timeline",aria-label="Timeline")
+        button#fullscreen(aria-label="Fullscreen")
+          i.fas.fa-expand
+
+    //- div.watch__detailText
+    //-   p=video.desc
+    //-   br
+    //-   small Uploaded by 
+    //-     a(href=`/users/${video.owner._id}`)=video.owner.username
+    //-   br
+    //-   small=video.createdAt
+    //-   br
+    //-   if String(video.owner._id) === String(user._id)
+    //-     a(href=`${video._id}/edit`) Edit Video &rarr;
+    //-     br
+    //-     a(href=`${video._id}/delete`) Delete Video &rarr;
+
+block scripts
+  script(src="/dist/js/videoPlayer.js") 

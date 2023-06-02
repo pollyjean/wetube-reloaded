@@ -1,6 +1,6 @@
 header {
   @include flex-c;
-  padding: $pad-md;
+  padding: $pad-md $pad-lg;
   margin-bottom: $pad-lg;
   width:100%;
   max-width: $screen-xl;
