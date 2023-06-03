@@ -47,12 +47,6 @@ header {
         letter-spacing: 0.2px;
         font-size: 0.9rem;
         @include box-shape;
-
-        &:hover,
-        &:focus,
-        &:active {
-          box-shadow: inset -1px -1px 1px $white, inset 1px 1px 1px $bg;
-        }
         &::placeholder {
           color: $bdr;
         }
@@ -84,7 +78,6 @@ header {
         min-height: 3rem;
         @include box-shape;
         padding: 0 $pad-md;
-        transition: all ease-in-out 0.2s;
         img {
           border-radius: 7px;
           height: 30px;

@@ -1,0 +1,76 @@
+#video__container {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #video__controller {
+    @include flex-c;
+    justify-content: space-between;
+    gap: $pad-md;
+    position: absolute;
+    bottom: $pad-md;
+    left: $pad-sm;
+    padding: $pad-sm;
+    width: calc(100% - $pad-sm * 2);
+    border-radius: 5px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.15) 100% );
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(0,0,0, 0.15);
+    color: rgba(255,255,255,0.7);
+    font-family: $coding;
+    font-size: 0.7rem;
+    letter-spacing: -0.5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in-out .2s;
+    &.showing {
+      opacity: 1;
+      visibility: visible;
+    }
+    div {
+      @include flex-c;
+    }
+    button {
+      background-color: transparent;
+      border: 0 none;
+      color: rgba(255,255,255,0.7);
+      transition: all ease-in-out 0.2s;
+      &:hover,
+      &:focus,
+      &:active {
+        color: rgba(255,255,255,0.9);
+        transform: scale(1.05);
+      }
+    }
+    input[type=range] {
+      width: 100%;
+      appearance: none;
+      background: rgba(255,255,255,0.7);
+      height: 0.2rem;
+      border-radius: 0.2rem;
+      &::-webkit-slider-thumb{
+        appearance:none;
+        width: 0.7rem;
+        height:0.7rem;
+        border-radius:50%;
+        background-color: $red;
+        &:hover,
+        &:focus,
+        &:active{
+          transform: scale(1.1);
+        }
+      }
+    }
+    .video__volumeGroup {
+      flex: 0 1 100px;
+    }
+    .video__timelineGroup {
+      flex: 2 0 200px;
+      gap: $pad-sm;
+    }
+  }
+}
