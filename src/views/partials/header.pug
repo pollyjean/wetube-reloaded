@@ -11,17 +11,20 @@ header
       li
       if loggedIn
         li
-          a(href="/videos/upload")
+          a(href="/videos/upload",aria-label="Upload")
             i.fas.fa-cloud-upload-alt
         li
-          if user.socialOnly && user.avatarUrl
-            a(href=`/users/${user._id}`,title=`${user.username}'s profile`)
-              img(src=`${user.avatarUrl}`,alt="Avatar Image")
-          else if user.avatarUrl
-            a(href=`/users/${user._id}`,title=`${user.username}'s profile`)
-              img(src=`/${user.avatarUrl}`,alt="Avatar Image")
+          a(href="/videos/record",ara-label="Video Recorder")
+            i.fas.fa-video
+        li
+          if user.socialOnly && user.avatarUrl && pageTitle !== "Video Recorder"
+            a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
+              img(src=`${user.avatarUrl}`,alt="Avatar")
+          else if user.avatarUrl && pageTitle !== "Video Recorder"
+            a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
+              img(src=`/${user.avatarUrl}`,alt="Avatar")
           else
-            a(href=`/users/${user._id}`,title=`${user.username}'s profile`)
+            a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
               i.fas.fa-user-circle
         li
           a(href="/users/logout") Logout

@@ -1,0 +1,19 @@
+#recorderContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 768px;
+  width: 100%;
+  button {
+    @include box-shape;
+    margin-bottom: $pad-sm;
+    width: 100%;
+    font-size: 0.9rem;
+    i {
+      color: $red;
+    }
+  }
+  video {
+    border-radius: 10px;
+    width: 100%;
+  }
+}

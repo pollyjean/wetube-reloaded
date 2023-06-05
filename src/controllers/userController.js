@@ -34,7 +34,7 @@ export const postLogin = async (req, res) => {
       .render("login", { pageTitle, errorMessage: "You have no account." });
   }
   if (!user.socialOnly) {
-    const match = await bcrypt.compare(password, user.password);
+    const match = bcrypt.compare(password, user.password);
     if (!match) {
       return res
         .status(400)
@@ -120,6 +120,7 @@ export const finishGithubLogin = async (req, res) => {
   }
 };
 export const logout = (req, res) => {
+  req.flash("info", "Bye Bye");
   req.session.destroy();
   return res.redirect("/");
 };
@@ -175,6 +176,7 @@ export const postEditPassword = async (req, res) => {
   savedData.password = password2;
   await savedData.save();
   req.session.user.password = savedData.password;
+  req.flash("info", "Password Updated.")
   return res.redirect("/users/logout");
 }
 export const viewProfile = async (req, res) => {
@@ -191,3 +193,5 @@ export const viewProfile = async (req, res) => {
   }
   return res.render("users/profile", { pageTitle: `${userInfo.username}'s Profile`, userInfo });
 };
+
+/** TODO: file size 제한 위반시 오류 문제 해결 */

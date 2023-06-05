@@ -11,14 +11,15 @@ export const protectorMiddleware = (req, res, next) => {
   if (req.session.loggedIn) {
     next();
   } else {
+    req.flash("error", "Not authorized.")
     return res.redirect("/login");
   }
 };
-
 export const publicOnlyMiddleware = (req, res, next) => {
   if (!req.session.loggedIn) {
     return next();
   } else {
+    req.flash("error", "Not authorized.")
     return res.redirect("/");
   }
 }
@@ -26,16 +27,16 @@ export const refreshMiddleware = (req, res, next) => {
   res.locals.execRefresh = true;
   next();
 }
+
 export const uploadAvatarMiddleware = multer({
   dest: "uploads/avatars",
   limits: {
     fileSize: 30000,
   }
 });
-
 export const uploadVideoMiddleware = multer({
   dest: "uploads/video",
   limits: {
-    fileSize: 10000000,
+    fileSize: 30000000,
   }
 });

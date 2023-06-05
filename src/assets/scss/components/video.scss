@@ -11,6 +11,8 @@
       width: 100%;
       background: $white;
       border-radius: $pad-sm;
+      background-size: cover;
+      background-position: center;
     }
     .home__videoTitle {
       font-weight: bolder;

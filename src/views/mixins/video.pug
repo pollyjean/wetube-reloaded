@@ -1,14 +1,18 @@
 mixin video(video)
   a.home__videoItem(href=`/videos/${video.id}`)
     article
-      div.home__videoThumb
+      if video.thumbUpload
+        div.home__videoThumb(style=`background-image:url(${video.thumbUpload})`)
+      else
+        div.home__videoThumb
       h4.home__videoTitle=video.title
-      div.home__videoHashtags
-        each hashtag in video.hashtags
-          i=hashtag + " "
+      if video.hashtags[0].length !== 1
+        div.home__videoHashtags
+          each hashtag in video.hashtags
+            i=hashtag + " "
       div.home__videoMeta
         small.home__videoOwner #{video.owner.fullname} &middot; 
         small.home__videoViews #{video.meta.views} 회
         br 
-        small.home__videoCreateAt Posted #{video.createdAt}
+        small.home__videoCreateAt Posted #{new Date(video.createdAt).toISOString().replace(/[A-Z]/ig, " ").split(".")[0]}
   hr

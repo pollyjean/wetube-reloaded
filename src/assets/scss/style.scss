@@ -12,6 +12,7 @@
 @import "./screens/home";
 @import "./screens/watch";
 @import "./screens/profile";
+@import "./screens/recorder";
 
 // defaults
 * {
@@ -50,5 +51,6 @@ main {
     font-size: 2rem;
     font-weight: bolder;
     padding-bottom: $pad-lg;
+    text-align: center;
   }
 }

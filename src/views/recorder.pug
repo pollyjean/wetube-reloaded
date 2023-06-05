@@ -1,0 +1,12 @@
+extends base.pug
+
+block content
+  div#recorderContainer 
+    button#recorderBtn
+      i.fas.fa-camera
+      |  
+      span Start Recording
+    video#videoStreaming
+
+block scripts
+  script(src="/dist/js/recorder.js")
