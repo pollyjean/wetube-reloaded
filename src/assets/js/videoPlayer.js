@@ -129,8 +129,8 @@ fullscreenBtn.addEventListener("click", handelFullscreen);
 videoContainer.addEventListener("mousemove", handleMousemove);
 videoContainer.addEventListener("mouseleave", handleMouseleave);
 
-/** 키보드 이벤트 리스너 */
-document.addEventListener("keydown", handleKeyControl);
+/** TODO: 키보드 이벤트 리스너 커멘트 기능이랑 겹쳐서 일단 주석처리 */
+//document.addEventListener("keydown", handleKeyControl);
 
 /** 비디오 이벤트 리스너
  * 비디오 상태를 리스닝해서 컨트롤을 변경

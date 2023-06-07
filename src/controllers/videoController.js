@@ -1,5 +1,6 @@
 import Video from "../models/Video";
 import User from "../models/User";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   const videos = await Video.find({}).sort({ createdAt: "desc" }).populate("owner");
@@ -41,14 +42,17 @@ export const getRecord = (req, res) => {
   res.header("Cross-Origin-Opener-Policy", "same-origin");
   return res.render("recorder", { pageTitle: "Video Recorder" });
 }
+
+/** 날짜 표시 적당히 줄여주기 */
 export const watch = async (req, res) => {
   const { params: { id }
   } = req;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
   const videoDate = new Date(video.createdAt).toISOString().replace(/[A-Z]/ig, " ").split(".")[0];
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
+  console.log(video);
   return res.render("watch", { pageTitle: video.title, video, videoDate });
 };
 export const getEdit = async (req, res) => {
@@ -117,9 +121,35 @@ export const registerView = async (req, res) => {
   await video.save();
   return res.sendStatus(200);
 }
-export const createComment = (req, res) => {
-  const { body } = req;
-  const { params: { id } } = req;
-  console.log(body, id);
-  return res.end();
+export const createComment = async (req, res) => {
+  const {
+    body: { text },
+    params: { id },
+    session: { user }
+  } = req
+  const video = await Video.findById(id);
+  if (!video) {
+    req.flash("error", "Video not found");
+    return res.sendStatus(404)
+  }
+  const userObj = await User.findById(user._id);
+  if (!userObj) {
+    req.flash("error", "User not found");
+    return res.sendStatus(404)
+  }
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id
+  });
+  video.comments.push(comment._id);
+  video.save();
+  userObj.comments.push(comment._id);
+  userObj.save();
+  return res.status(201).json({ newCommentId: comment._id });
 }
+
+/** TODO: 사용자 프로필에 댓글 단거 추가하기
+ * 댓글 지우기 method = "DELETE" 
+ * 댓글에 사용자 이름, 날짜 추가
+ */
