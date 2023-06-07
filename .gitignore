@@ -2,6 +2,7 @@
 /node_modules
 /uploads
 /dist
+/build
 
 ##### macOS.gitignore #####
 # General

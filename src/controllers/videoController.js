@@ -52,7 +52,6 @@ export const watch = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
-  console.log(video);
   return res.render("watch", { pageTitle: video.title, video, videoDate });
 };
 export const getEdit = async (req, res) => {
