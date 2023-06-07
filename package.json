@@ -7,7 +7,7 @@
 		"url": "git+https://github.com/pollyjean/wetube-reloaded.git"
 	},
 	"scripts": {
-		"start": "node build/index.js",
+		"start": "node build/init.js",
 		"build": "npm run build:server && npm run build:assets",
 		"build:server": "babel src -d build",
 		"build:assets": "webpack --mode=production",

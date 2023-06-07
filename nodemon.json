@@ -1,4 +1,4 @@
 {
 	"ignore": ["webpack.config.cjs", "src/assets/*", "dist/*"],
-	"exec": "babel-node src/index.js"
+	"exec": "babel-node src/init.js"
 }
