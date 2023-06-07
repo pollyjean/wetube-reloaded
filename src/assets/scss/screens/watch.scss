@@ -1,6 +1,6 @@
 .watch__detail {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: $pad-lg;
   width: 100%;
   @media (max-width:$screen-lg) {
