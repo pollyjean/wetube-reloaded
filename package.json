@@ -1,5 +1,5 @@
 {
-	"name": "wetube",
+	"name": "skyTube",
 	"version": "1.0.0",
 	"description": "The best way to watch videos.",
 	"repository": {
@@ -14,7 +14,7 @@
 		"dev:server": "nodemon",
 		"dev:assets": "webpack --mode=development -w"
 	},
-	"author": "Pollyjean<pollyjean@naver.com>",
+	"author": "skysurfr<skysurfr@me.com>",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/pollyjean/wetube-reloaded/issues"
