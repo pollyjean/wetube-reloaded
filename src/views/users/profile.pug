@@ -10,15 +10,14 @@ block content
       div
         img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
     ul
-      if (String(userInfo._id) === String(user._id))
-        li Email : #{userInfo.email}
+      li Email : #{userInfo.email}
       li Full Name : #{userInfo.fullname}
       li Location : #{userInfo.location}
-  if userInfo.videos[0] && (String(userInfo.videos[0].owner._id) === String(user._id))
+  if String(userInfo._id) === String(user._id)
     div.btn__groups
       a(href=`/users/edit`) Edit User Profile &rarr;
   hr
-  block content
+  if userInfo.videos[0] && (String(userInfo.videos[0].owner._id) === String(user._id))
     if userInfo.videos
       div.home__videoList
         each video in userInfo.videos
