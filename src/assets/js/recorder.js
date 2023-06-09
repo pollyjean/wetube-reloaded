@@ -47,6 +47,7 @@ const makeDownload = (fileUrl, fileName) => {
   downLink.setAttribute("download", fileName);
   document.body.appendChild(downLink);
   downLink.click();
+  document.querySelector(".btn__hidden").classList.add("showing");
 }
 const setBtnDisable = (state = true) => {
   recorderBtn.disabled = state;
@@ -116,6 +117,7 @@ const handleStartRecording = () => {
   recorder.record = new MediaRecorder(recorder.stream);
   recorderBtn.removeEventListener("click", handleStartRecording);
   recorderBtn.addEventListener("click", handleStopRecording);
+  document.querySelector(".btn__hidden").classList.remove("showing");
   recorder.record.ondataavailable = (event) => {
     recorder.url = URL.createObjectURL(event.data);
     videoStreamingObj.srcObject = null;

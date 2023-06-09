@@ -3,11 +3,12 @@ include ../mixins/video
 
 block content
   section.profile__view
-    div.avatar__frame
-      if user.avatarUrl.includes("uploads/avatars/")
-        img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
-      else if user.avatarUrl
-        img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200",crossorigin)
+    if user.avatarUrl
+      div.avatar__frame
+        if user.avatarUrl.includes("uploads/avatars/")
+          img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
+        else if user.avatarUrl
+          img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200",crossorigin)
     ul
       li Email : #{userInfo.email}
       li Full Name : #{userInfo.fullname}

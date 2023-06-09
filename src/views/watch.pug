@@ -23,23 +23,32 @@ block content
           input#volume(type="range", name="volume",min="0",max="1",step="0.01",value="0.5",aria-label="Volume Level")
         button#fullscreen(aria-label="Enter Fullscreen")
           i.fas.fa-expand
-    div.watch__detailText
-      p=video.desc
-      br
+    div.watch__smallText
       small Uploaded by 
         a(href=`/users/${video.owner._id}`)=video.owner.username
-      br
+      | &middot; 
       small=videoDate
-      br
+      if video.meta.views === 1 
+        small=` · ${video.meta.views} view`
+      else if video.meta.views > 1
+        small=` · ${video.meta.views} views`
+    div.watch__detailText
+      p=video.desc
+      if video.hashtags[0].length !== 1
+        div.watch__detailHashtag
+          each hashtag in video.hashtags
+            i=hashtag + " "
       if String(video.owner._id) === String(user._id)
-        a(href=`${video._id}/edit`) Edit Video &rarr;
-        br
-        a(href=`${video._id}/delete`) Delete Video &rarr;
+        div.btn__groups
+          a(href=`${video._id}/edit`)
+            i.fas.fa-edit 
+            |  Edit
     div.watch__commentsContainer
       form.watch__commentForm#commentForm
-        label(for="commentArea") Comment 
+        label(for="commentArea") Comment
         textarea#commentArea(name="commentArea", cols="30", rows="2", placeholder="Good Comment Here")
-        button(type="submit") Add Comment
+        button(type="submit",aria-label="Add Comment")
+          i.fas.fa-comment
       div.watch__commentsList
         ul
           each comment in video.comments.reverse()

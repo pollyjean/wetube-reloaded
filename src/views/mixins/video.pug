@@ -11,8 +11,11 @@ mixin video(video)
           each hashtag in video.hashtags
             i=hashtag + " "
       div.home__videoMeta
-        small.home__videoOwner #{video.owner.fullname} &middot; 
-        small.home__videoViews #{video.meta.views} 회
+        small.home__videoOwner #{video.owner.fullname}
+        if video.meta.views === 1 
+          small=` · ${video.meta.views} view`
+        else if video.meta.views > 1
+          small=` · ${video.meta.views} views`
         br 
-        small.home__videoCreateAt Posted #{new Date(video.createdAt).toISOString().replace(/[A-Z]/ig, " ").split(".")[0]}
+        small.home__videoCreateAt Created At #{new Date(video.createdAt).toISOString().replace(/[A-Z]/ig, " ").split(".")[0]}
   hr

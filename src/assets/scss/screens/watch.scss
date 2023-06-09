@@ -1,8 +1,8 @@
 .watch__detail {
-  display: flex;
+  @include flex-c;
   flex-direction: column;
-  gap: $pad-lg;
   width: 100%;
+  max-width: $screen-md;
   @media (max-width:$screen-lg) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -12,9 +12,113 @@
   @media (max-width:$screen-sm) {
     grid-template-columns: repeat(1, 1fr);
   }
-}
-.watch__commentsContainer {
-  .watch__commentClose{
-    cursor: pointer;
+  .watch__smallText {
+    @include flex-c;
+    font-size: 0.5rem;
+    opacity: 0.5;
+    gap: 5px;
+    justify-content: flex-end;
+    padding-top: 5px;
+    width: 100%;
+  }
+  .watch__detailText {
+    padding: $pad-md 0 0;
+    width: 100%;
+    p {
+      padding-bottom: $pad-md;
+      margin-bottom: $pad-md;
+      border-bottom: 1px solid $bdr;
+    }
+    .watch__detailHashtag {
+      font-family: $coding;
+      font-size: 0.8rem;
+      font-weight: bolder;
+    }
+    .watch__detailButtons {
+      font-size: 0.7rem;
+      font-weight: bolder;
+    }
+  }
+  .watch__commentsContainer {
+    @include flex-c;
+    flex-direction: column;
+    width: 100%;
+    max-width: $screen-md;
+    .watch__commentForm {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 2rem;
+      gap: $pad-md;
+      label {
+        position: absolute;
+        top: -1.2rem;
+        left: $pad-md;
+        opacity: 0.8;
+        font-size: 0.8rem;
+      }
+      textarea {
+        @include flex-c;
+        flex: 1 1 80%;
+        padding: $pad-sm $pad-lg;
+        width: 100%;
+        letter-spacing: 0.2px;
+        font-size: 0.9rem;
+        @include box-shape;
+        background-color: $white;
+        font-family: $fnt;
+        &::placeholder {
+          color: $bdr;
+        }
+      }
+      button {
+        @include flex-c;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: bold;
+        line-height: 1;
+        letter-spacing: -0.5px;
+        min-height: 3rem;
+        border-radius: 10px;
+        border: 1px solid $bdr;
+        padding: $pad-sm $pad-lg;
+        cursor: pointer;
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    .watch__commentsList {
+      @include flex-c;
+      width: 100%;
+      margin: $pad-lg 0;
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: $pad-sm;
+        width: 100%;
+        li {
+          @include flex-c;
+          justify-content: space-between;
+          background-color: $white;
+          @include box-shape;
+          .watch__commentText {
+            width: 100%;
+            padding: $pad-md;
+          }
+          .watch__commentClose {
+            display: flex;
+            cursor: pointer;
+            color: red;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            flex: 0 1 1rem;
+            padding: .5rem 1rem;
+          }
+        }
+      }
+    }
   }
 }

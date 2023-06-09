@@ -25,7 +25,10 @@ a {
 body {
   @include flex-c;
   flex-direction: column;
-  background: $light;
+  background-color: $light;
+  background-image: url(https://skysurfr.cdn3.cafe24.com/img/resul-mentes-DbwYNr8RPbg-unsplash-min2.jpg);
+  background-repeat: repeat;
+  background-size: cover;
   color: $dark;
   font-family: $fnt;
   font-weight: normal;
@@ -50,7 +53,7 @@ main {
     width: 100%;
     font-size: 2rem;
     font-weight: bolder;
-    padding-bottom: $pad-lg;
+    padding-bottom: 4rem;
     text-align: center;
   }
 }

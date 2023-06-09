@@ -1,7 +1,8 @@
 header
   a(href="/").header__logo
     h1
-      i.fab.fa-youtube
+      i.fab.fa-skyatlas
+      span SkyTube
   div#search
     form(action="/search")
       input(placeholder="Search by title",name="keyword", type="text", required, value="")
@@ -21,13 +22,17 @@ header
             if !(user.avatarUrl)
               i.fas.fa-user-circle
             else if user.avatarUrl.includes("uploads/avatars/")
-              img(src=`/${user.avatarUrl}`,alt="Avatar")
+              span
+                img(src=`/${user.avatarUrl}`,alt="Avatar")
             else
-              img(src=`${user.avatarUrl}`,alt="Avatar",crossorigin)
+              span
+                img(src=`${user.avatarUrl}`,alt="Avatar",crossorigin)
         li
-          a(href="/users/logout") Logout
+          a(href="/users/logout",aria-label="Logout")
+            i.fas.fa-sign-out-alt
       else
         li
           a(href="/join") Join
         li
-          a(href="/login") Login
+          a(href="/login",aria-label="Login")
+            i.fas.fa-sign-in-alt

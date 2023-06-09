@@ -10,7 +10,7 @@
       height: 140px;
       width: 100%;
       background: $white;
-      border-radius: $pad-sm;
+      border-radius: 10px;
       background-size: cover;
       background-position: center;
     }
@@ -30,16 +30,17 @@
       width: 100%;
       align-items: flex-start;
       gap: $pad-sm;
-      padding-bottom: $pad-sm;
+      padding-bottom: 10px;
       i {
         font-family: $coding;
-        font-size: 0.85rem;
+        font-size: 0.7rem;
       }
     }
     .home__videoMeta {
       width: 85%;
-      bottom: $pad-sm;
       font-size: 0.6rem;
+      opacity: 0.6;
+      line-height: 1.2;
     }
   }
 }

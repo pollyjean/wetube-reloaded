@@ -3,9 +3,10 @@ $coding : ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'De
 
 $bg:#282828;
 $dark: #3C3C3C;
-$light: #EDEDED;
+$light: rgba(255, 255, 255, 0.7);
 $white: #fff;
 $red:#CC0000;
+$blue: #52ACC0;
 
 $screen-xl: 1280px;
 $screen-lg: 1024px;
@@ -15,7 +16,7 @@ $pad-lg: 1.5rem;
 $pad-md: 1rem;
 $pad-sm: 0.75rem;
 
-$bdr: rgba(0,0,0,0.15);
+$bdr: rgba($blue ,0.2);
 
 @mixin flex-c {
   display: flex;
@@ -25,18 +26,20 @@ $bdr: rgba(0,0,0,0.15);
 @mixin box-shape {
   color: $dark;
   background-color: $light;
-  border: 1px solid rgba(0,0,0,0.1);
-  padding: $pad-sm $pad-lg;
-  border-radius: $pad-sm;
-  box-shadow: inset 2px 2px 1px $white, inset 4px 4px 3px rgba(0,0,0,0.01), 1px 1px 1px rgba(255,255,255,0.8), 2px 2px 2px rgba(0,0,0,0.75);
+  border: 1px solid $bdr;
+  padding: $pad-sm $pad-sm;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
   &:hover,
   &:focus,
   &:active {
-    box-shadow: inset -1px -1px 1px $white, inset 1px 1px 1px $bg;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    color: $bg;
   }
   &:disabled,
   &.disabled {
-    color: rgba( $dark, 0.7);
-    box-shadow: inset 2px 2px 1px $white, inset 4px 4px 3px rgba(0,0,0,0.01), 1px 1px 1px rgba(255,255,255,0.8), 2px 2px 2px rgba(0,0,0,0.75);
+    color: rgba( $dark, 0.5);
+    cursor: default;
+    box-shadow: none;
   }
 }

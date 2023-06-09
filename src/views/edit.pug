@@ -11,3 +11,7 @@ block content
     input(name="hashtags",id="updateTags",placeholder="Hashtags, separated by comma.", type="text", value=video.hashtags.join())
     p.form__comment Hashtags separated by comma (eg. #funny,#home,#lovely)
     input(type="submit", value="Edit Video")
+  div.btn__groups
+    a(href=`${video._id}/delete`)
+      i.fas.fa-trash 
+      |  Delete
