@@ -10,10 +10,23 @@ const s3 = new S3Client({
   },
 });
 
-const multerUploader = multerS3({
+const s3ImageUploader = multerS3({
   s3: s3,
-  bucket: 'polyjean-aws-first-bucket',
+  bucket: "polyjean-aws-first-bucket",
   acl: "public-read",
+  key: (req, file, cb) => {
+    cb(null, `images/${file.originalname}`)
+  }
+});
+
+const s3VideoUploader = multerS3({
+  s3: s3,
+  bucket: "polyjean-aws-first-bucket",
+  acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  key: (req, file, cb) => {
+    cb(null, `videos/${file.originalname}`)
+  }
 });
 
 export const localsMiddleware = (req, res, next) => {
@@ -21,6 +34,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "weTube";
   res.locals.user = req.session.user || {};
   res.locals.execRefresh = false;
+  res.locals.isHosting = process.env.NODE_ENV === "production";
   next();
 }
 export const protectorMiddleware = (req, res, next) => {
@@ -49,12 +63,12 @@ export const uploadAvatarMiddleware = multer({
   limits: {
     fileSize: 300000,
   },
-  storage: multerUploader,
+  storage: (process.env.NODE_ENV === "production") ? s3ImageUploader : undefined,
 });
 export const uploadVideoMiddleware = multer({
   dest: "uploads/video",
   limits: {
     fileSize: 30000000,
   },
-  storage: multerUploader,
+  storage: (process.env.NODE_ENV === "production") ? s3VideoUploader : undefined,
 });

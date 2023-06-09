@@ -16,13 +16,14 @@ header
         li
           a(href="/videos/record",ara-label="Video Recorder")
             i.fas.fa-video
-        li
-          if user.avatarUrl && pageTitle !== "Video Recorder"
-            a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
-              img(src=`${user.avatarUrl}`,alt="Avatar",crossorigin)
-          else
-            a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
+        li        
+          a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
+            if !(user.avatarUrl) || pageTitle == "Video Recorder"
               i.fas.fa-user-circle
+            else if user.avatarUrl.includes("uploads/avatars/")
+              img(src=`/${user.avatarUrl}`,alt="Avatar")
+            else
+              img(src=`${user.avatarUrl}`,alt="Avatar",crossorigin)
         li
           a(href="/users/logout") Logout
       else
