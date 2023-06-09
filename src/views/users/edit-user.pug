@@ -6,7 +6,7 @@ block content
       img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
   else if user.avatarUrl
     div
-      img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
+      img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
   form.form__inputPost(method="POST",action="/users/edit/user-data",enctype="multipart/form-data")
     if errorMessage
       p.error__message=errorMessage

@@ -17,12 +17,9 @@ header
           a(href="/videos/record",ara-label="Video Recorder")
             i.fas.fa-video
         li
-          if user.socialOnly && user.avatarUrl && pageTitle !== "Video Recorder"
+          if user.avatarUrl && pageTitle !== "Video Recorder"
             a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
-              img(src=`${user.avatarUrl}`,alt="Avatar")
-          else if user.avatarUrl && pageTitle !== "Video Recorder"
-            a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
-              img(src=`/${user.avatarUrl}`,alt="Avatar")
+              img(src=`${user.avatarUrl}`,alt="Avatar",crossorigin)
           else
             a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
               i.fas.fa-user-circle

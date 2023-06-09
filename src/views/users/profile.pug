@@ -3,12 +3,9 @@ include ../mixins/video
 
 block content
   section.profile__view
-    if user.socialOnly && user.avatarUrl
-      div.avatar__frame
-        img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
-    else if user.avatarUrl
+    if user.avatarUrl
       div
-        img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
+        img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
     ul
       li Email : #{userInfo.email}
       li Full Name : #{userInfo.fullname}

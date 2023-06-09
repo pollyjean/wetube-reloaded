@@ -4,7 +4,7 @@ block content
   section.watch__detail
     figure#video__container(data-id=video._id)
       video
-        source(src=`/${video.videoUpload}`,type="video/mp4")
+        source(src=`${video.videoUpload}`,type="video/mp4",crossorigin)
       div#video__controller
         button#play(aria-label="Play",aria-pressed="false")
           i.fas.fa-play
