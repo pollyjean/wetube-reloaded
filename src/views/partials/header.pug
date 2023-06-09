@@ -18,7 +18,7 @@ header
             i.fas.fa-video
         li        
           a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
-            if !(user.avatarUrl) || pageTitle == "Video Recorder"
+            if !(user.avatarUrl)
               i.fas.fa-user-circle
             else if user.avatarUrl.includes("uploads/avatars/")
               img(src=`/${user.avatarUrl}`,alt="Avatar")
