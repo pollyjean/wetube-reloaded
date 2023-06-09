@@ -40,14 +40,13 @@ block content
         label(for="commentArea") Comment 
         textarea#commentArea(name="commentArea", cols="30", rows="2", placeholder="Good Comment Here")
         button(type="submit") Add Comment
-      if video.comments.length > 0
-        div.watch__commentsList
-          ul
-            each comment in video.comments.reverse()
-              li(data-id=comment._id)
-                span.watch__commentText=comment.text
-                if String(comment.owner._id) === String(user._id)
-                  i.fas.fa-times.watch__commentClose
+      div.watch__commentsList
+        ul
+          each comment in video.comments.reverse()
+            li(data-id=comment._id)
+              span.watch__commentText=comment.text
+              if String(comment.owner._id) === String(user._id)
+                i.fas.fa-times.watch__commentClose
 block scripts
   script(src="/dist/js/videoPlayer.js") 
   if loggedIn
