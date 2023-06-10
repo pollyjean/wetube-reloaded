@@ -8,6 +8,8 @@ const timeCurrentTxt = document.getElementById("timeCurrent");
 const timeDurationTxt = document.getElementById("timeDuration");
 const timelineRange = document.getElementById("timeline");
 const fullscreenBtn = document.getElementById("fullscreen");
+const videoCover = document.querySelector(".video__playCover");
+const commentArea = document.getElementById("commentArea");
 
 /** 쿠키에 볼륨 집어넣기 */
 const VOLUME_IS = "volume=";
@@ -27,6 +29,10 @@ const videoStat = {
  */
 const handlePlay = () => {
   videoObj.paused ? videoObj.play() : videoObj.pause();
+  videoCover.remove();
+}
+const handlePlayCover = () => {
+  handlePlay();
 }
 const handleMute = () => {
   if (videoObj.muted) {
@@ -80,6 +86,13 @@ const handleKeyControl = (event) => {
       document.fullscreenElement && document.exitFullscreen();
   }
 }
+const handleCommentFocusIn = () => {
+  document.removeEventListener("keydown", handleKeyControl);
+}
+
+const handleCommentFocusOut = () => {
+  document.addEventListener("keydown", handleKeyControl);
+}
 
 /** 이벤트 모니터링
  * 미디어 이벤트를 감시한다
@@ -128,9 +141,11 @@ timelineRange.addEventListener("input", handleTimeline);
 fullscreenBtn.addEventListener("click", handelFullscreen);
 videoContainer.addEventListener("mousemove", handleMousemove);
 videoContainer.addEventListener("mouseleave", handleMouseleave);
+videoCover.addEventListener("click", handlePlayCover);
 
-/** TODO: 키보드 이벤트 리스너 커멘트 기능이랑 겹쳐서 일단 주석처리 */
-//document.addEventListener("keydown", handleKeyControl);
+document.addEventListener("keydown", handleKeyControl);
+commentArea.addEventListener("focusin", handleCommentFocusIn);
+commentArea.addEventListener("focusout", handleCommentFocusOut);
 
 /** 비디오 이벤트 리스너
  * 비디오 상태를 리스닝해서 컨트롤을 변경
@@ -140,6 +155,7 @@ videoObj.addEventListener("play", setPlayBtn);
 videoObj.addEventListener("volumechange", setMuteBtn);
 videoObj.addEventListener("timeupdate", getVideoCurrentTime);
 videoContainer.addEventListener("fullscreenchange", setFullscreenBtn);
+
 
 /** 비디오 뷰 카운터 이벤트 View API */
 videoObj.addEventListener("ended", monitorPlayCount);

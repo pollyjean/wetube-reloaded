@@ -132,9 +132,5 @@ const handleStartRecording = () => {
 initRecorder();
 recorderBtn.addEventListener("click", handleStartRecording);
 
-/** TODO:
- * 1. 타이머의 시간을 조절하는 폼 인풋
- * 2. 화면 루프를 멈출 수 있는 클릭 이벤트
- * 3. 좀더 우아한 UI/UX
- * 4. 상태에 따라 아이콘 바꾸기
+/** TODO: 타이머의 시간을 조절하는 폼 인풋, 화면 루프를 멈출 수 있는 클릭 이벤트, 좀더 우아한 UI/UX, 상태에 따라 아이콘 바꾸기
  */

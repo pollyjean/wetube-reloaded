@@ -16,7 +16,6 @@ const addCommentLine = (text, id, user) => {
   newCommentClose.addEventListener("click", handleCommentRemove);
   newCommentItem.appendChild(newCommentClose);
   commentsList.prepend(newCommentItem);
-  console.log(newCommentItem);
 }
 const handleCommentRemove = async (event) => {
   const closeButton = event.target;

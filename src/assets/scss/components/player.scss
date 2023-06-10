@@ -1,9 +1,38 @@
 #video__container {
   position: relative;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
   width: 100%;
   max-width: $screen-md;
+  .video__playCover {
+    position: absolute;
+    top: 0;
+    bottom : 0;
+    left: 0;
+    right: 0;
+    background-size:cover;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    background-color: rgba($white, 0.2);
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    i {
+      font-size: 10rem;
+      color: $red;
+      @media (max-width:$screen-lg) {
+        font-size: 8rem;
+      }
+      @media (max-width:$screen-md) {
+        font-size: 7rem;
+      }
+      @media (max-width:$screen-sm) {
+        font-size: 5rem;
+      }
+    }
+  }
   video {
     width: 100%;
     height: 100%;
