@@ -126,7 +126,7 @@ const handleStartRecording = () => {
     videoStreamingObj.play();
   };
   recorder.record.start();
-  countRecording(5);
+  countRecording(6);
 }
 
 initRecorder();
