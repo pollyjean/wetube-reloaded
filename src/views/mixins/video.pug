@@ -12,8 +12,9 @@ mixin video(video)
             i=hashtag + " "
       div.home__videoMeta
         if video.owner 
-          small.home__videoOwner #{video.owner.fullname} · 
-          
+          small.home__videoOwner #{video.owner.fullname}
+        if video.owner && video.meta.views > 0
+          |  ·  
         if video.meta.views === 1 
           small=`${video.meta.views} view`
         else if video.meta.views > 1

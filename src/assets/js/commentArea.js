@@ -4,13 +4,13 @@ const textarea = document.getElementById("commentArea");
 const commentBtn = commentForm.querySelector("button");
 const commentsList = document.querySelector(".watch__commentsList ul");
 
-const addCommentLine = (text, id) => {
+const addCommentLine = (text, id, user) => {
   const newCommentItem = document.createElement("li");
   const newCommentText = document.createElement("span");
   const newCommentClose = document.createElement("i");
   newCommentText.classList.add("watch__commentText");
-  newCommentText.innerText = text;
-  newCommentItem.appendChild(newCommentText);
+  newCommentText.innerText = `${user} : ${text}`;
+  newCommentItem.appendChild(newCommentText);[]
   newCommentItem.dataset.id = id;
   newCommentClose.className = "fas fa-times watch__commentClose";
   newCommentClose.addEventListener("click", handleCommentRemove);
@@ -45,8 +45,8 @@ const handleCommentSubmit = async (event) => {
   });
 
   if (response.status === 201) {
-    const { newCommentId } = await response.json();
-    addCommentLine(textarea.value, newCommentId);
+    const { newCommentId, userId } = await response.json();
+    addCommentLine(textarea.value, newCommentId, userId);
     textarea.value = "";
   }
 }

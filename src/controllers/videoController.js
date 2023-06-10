@@ -47,7 +47,16 @@ export const getRecord = (req, res) => {
 export const watch = async (req, res) => {
   const { params: { id }
   } = req;
-  const video = await Video.findById(id).populate("owner").populate("comments");
+  const video = await Video.findById(id).populate("owner").populate("comments").populate({
+    path: "comments",
+    populate: {
+      path: "owner",
+      populate: {
+        path: "username"
+      }
+    }
+  });
+  console.log(video.comments[0].owner.username);
   const videoDate = new Date(video.createdAt).toISOString().replace(/[A-Z]/ig, " ").split(".")[0];
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -145,7 +154,7 @@ export const createComment = async (req, res) => {
   video.save();
   userObj.comments.push(comment._id);
   userObj.save();
-  return res.status(201).json({ newCommentId: comment._id });
+  return res.status(201).json({ newCommentId: comment._id, userId: userObj.username });
 }
 
 export const removeComment = async (req, res) => {
@@ -171,13 +180,11 @@ export const removeComment = async (req, res) => {
     await Comment.findByIdAndDelete(id);
     await relatedVideo.save();
     await commentUser.save();
-    console.log(relatedVideo.comments, commentUser.comments, commentUser._id, relatedVideo._id);
     return res.sendStatus(201);
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
   }
-
 }
 
 /** TODO: 사용자 프로필에 댓글 단거 추가하기

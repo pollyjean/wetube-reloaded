@@ -44,16 +44,20 @@ block content
             i.fas.fa-edit 
             |  Edit
     div.watch__commentsContainer
-      form.watch__commentForm#commentForm
-        label(for="commentArea") Comment
-        textarea#commentArea(name="commentArea", cols="30", rows="2", placeholder="Good Comment Here")
-        button(type="submit",aria-label="Add Comment")
-          i.fas.fa-comment
+      if loggedIn
+        form.watch__commentForm#commentForm
+          label(for="commentArea") Comment
+          textarea#commentArea(name="commentArea", cols="30", rows="2", placeholder="Good Comment Here")
+          button(type="submit",aria-label="Add Comment")
+            i.fas.fa-comment
       div.watch__commentsList
         ul
           each comment in video.comments.reverse()
             li(data-id=comment._id)
-              span.watch__commentText=comment.text
+              if comment.owner.username
+                span.watch__commentText=`${comment.owner.username} : ${comment.text}`
+              else
+                span.watch__commentText=comment.text
               if String(comment.owner._id) === String(user._id)
                 i.fas.fa-times.watch__commentClose
 block scripts
