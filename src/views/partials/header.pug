@@ -27,11 +27,13 @@ header
               span
                 img(src=`${user.avatarUrl}`,alt="Avatar")
         li
-          a(href="/users/logout",aria-label="Logout")
-            i.fas.fa-sign-out-alt
+          a(href="/users/logout")
+            i.fas.fa-sign-out-alt 
+            | &nbsp;Logout
       else
         li
           a(href="/join") Join
         li
-          a(href="/login",aria-label="Login")
-            i.fas.fa-sign-in-alt
+          a(href="/login")
+            i.fas.fa-sign-in-alt 
+            | &nbsp;Login

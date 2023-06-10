@@ -29,6 +29,7 @@ app.use(
 app.use(flash());
 app.use(cors({ origin: true }));
 app.use(localsMiddleware);
+app.use("/public", express.static("public"));
 app.use("/uploads", express.static("uploads"));
 app.use("/dist", express.static("dist"));
 app.use("/", rootRouter);
