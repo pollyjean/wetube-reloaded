@@ -14,8 +14,9 @@
   }
   .watch__smallText {
     @include flex-c;
-    font-size: 0.5rem;
-    opacity: 0.5;
+    font-size: 0.6rem;
+    opacity: 0.6;
+    margin-top: 5px;
     gap: 5px;
     justify-content: flex-end;
     padding-top: 5px;
@@ -31,7 +32,7 @@
     }
     .watch__detailHashtag {
       font-family: $coding;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: bolder;
     }
     .watch__detailButtons {

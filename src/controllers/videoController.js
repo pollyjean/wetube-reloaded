@@ -56,7 +56,6 @@ export const watch = async (req, res) => {
       }
     }
   });
-  console.log(video.comments[0].owner.username);
   const videoDate = new Date(video.createdAt).toISOString().replace(/[A-Z]/ig, " ").split(".")[0];
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -187,7 +186,5 @@ export const removeComment = async (req, res) => {
   }
 }
 
-/** TODO: 사용자 프로필에 댓글 단거 추가하기
- * 댓글 지우기 method = "DELETE" 
- * 댓글에 사용자 이름, 날짜 추가
+/** TODO: 사용자 프로필에 댓글 단거 추가하기, 댓글에 사용자 이름, 날짜 추가, 좋아요 추가
  */

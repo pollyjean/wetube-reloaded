@@ -144,9 +144,11 @@ videoContainer.addEventListener("mouseleave", handleMouseleave);
 videoCover.addEventListener("click", handlePlayCover);
 
 document.addEventListener("keydown", handleKeyControl);
-commentArea.addEventListener("focusin", handleCommentFocusIn);
-commentArea.addEventListener("focusout", handleCommentFocusOut);
 
+if (commentArea) {
+  commentArea.addEventListener("focusin", handleCommentFocusIn);
+  commentArea.addEventListener("focusout", handleCommentFocusOut);
+}
 /** 비디오 이벤트 리스너
  * 비디오 상태를 리스닝해서 컨트롤을 변경
  */
