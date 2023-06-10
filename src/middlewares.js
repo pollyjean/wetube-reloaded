@@ -53,11 +53,6 @@ export const publicOnlyMiddleware = (req, res, next) => {
     return res.redirect("/");
   }
 }
-export const refreshMiddleware = (req, res, next) => {
-  res.locals.execRefresh = true;
-  next();
-}
-
 export const uploadAvatarMiddleware = multer({
   dest: "uploads/avatars",
   limits: {

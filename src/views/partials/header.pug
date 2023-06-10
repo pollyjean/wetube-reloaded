@@ -9,7 +9,6 @@ header
       button.fas.fa-search(type="submit")
   nav
     ul 
-      li
       if loggedIn
         li
           a(href="/videos/upload",aria-label="Upload")
@@ -19,14 +18,14 @@ header
             i.fas.fa-video
         li        
           a(href=`/users/${user._id}`,aria-label=`${user.username}'s profile`)
-            if !(user.avatarUrl)
+            if !(user.avatarUrl) || pageTitle === "Video Recorder"
               i.fas.fa-user-circle
             else if user.avatarUrl.includes("uploads/avatars/")
               span
                 img(src=`/${user.avatarUrl}`,alt="Avatar")
             else
               span
-                img(src=`${user.avatarUrl}`,alt="Avatar",crossorigin)
+                img(src=`${user.avatarUrl}`,alt="Avatar")
         li
           a(href="/users/logout",aria-label="Logout")
             i.fas.fa-sign-out-alt

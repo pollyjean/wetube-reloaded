@@ -7,7 +7,7 @@ block content
         if video.videoUpload.includes("uploads/video/")
           source(src=`/${video.videoUpload}`,type="video/mp4")
         else
-          source(src=`${video.videoUpload}`,type="video/mp4",crossorigin)
+          source(src=`${video.videoUpload}`,type="video/mp4")
       div#video__controller
         button#play(aria-label="Play",aria-pressed="false")
           i.fas.fa-play

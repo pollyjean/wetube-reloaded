@@ -10,9 +10,13 @@ block content
     input(id="loginPassword",name="password",type="password",required,placeholder="Enter Password")
     input(type="submit" value="Login") 
     br
-    a.btn__social(href="/users/github/start")
-      i.fab.fa-github
-      span  Continue with GitHub &rarr;
+    div.login__social
+      a.btn__social(href="/users/github/start")
+        i.fab.fa-github
+        span  Continue with GitHub &rarr;
+      a.btn__social(href="/users/kakao/start")
+        i.fas.fa-comment
+        span  Continue with Kakao &rarr;
   hr
   div
     span Don't have an account?

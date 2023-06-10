@@ -8,13 +8,8 @@ header {
     flex-direction: column;
     align-items: center;
   }
-  @media (max-width:$screen-md) {
-    flex-direction: column;
-    align-items: center;
-  }
   @media (max-width:$screen-sm) {
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 1rem;
   }
   .header__logo {
     flex: 1 1 33%;
@@ -37,6 +32,9 @@ header {
     @include flex-c;
     flex-direction: column;
     padding: $pad-sm;
+    @media (max-width:$screen-sm) {
+      padding: $pad-lg 0;
+    }
     form {
       @include flex-c;
       position: relative;
@@ -65,6 +63,7 @@ header {
     @include flex-c;
     flex: 1 1 33%;
     flex-direction: row-reverse;
+
     ul {
       @include flex-c;
       justify-content: space-around;

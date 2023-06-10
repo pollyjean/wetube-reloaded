@@ -8,11 +8,13 @@ block content
         if user.avatarUrl.includes("uploads/avatars/")
           img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
         else if user.avatarUrl
-          img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200",crossorigin)
+          img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
     ul
-      li Email : #{userInfo.email}
+      if String(userInfo._id) === String(user._id)
+        li Email : #{userInfo.email}
       li Full Name : #{userInfo.fullname}
-      li Location : #{userInfo.location}
+      if userInfo.location
+        li Location : #{userInfo.location}
   if String(userInfo._id) === String(user._id)
     div.btn__groups
       a(href=`/users/edit`) Edit User Profile &rarr;

@@ -1,0 +1,9 @@
+.form__inputPost {
+  border-radius: 10px;
+  .login__social {
+    @include flex-c;
+    flex-direction: column;
+    gap: $pad-sm;
+    width: 100%;
+  }
+}

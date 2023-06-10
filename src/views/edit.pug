@@ -6,11 +6,11 @@ block content
     label(for="updateTitle") Title
     input(name="title",id="updateTitle",placeholder="Enter Video Title", type="text", required, maxlength=80, value=video.title)
     label(for="updateDesc") Description
-    input(name="desc",id="updateDesc",placeholder="Enter Description", type="text", required, minlength=10, maxlength=255, value=video.desc)
+    input(name="desc",id="updateDesc",placeholder="Enter Description", type="text", required, minlength=5, maxlength=255, value=video.desc)
     label(for="updateTags") Hashtags
     input(name="hashtags",id="updateTags",placeholder="Hashtags, separated by comma.", type="text", value=video.hashtags.join())
     p.form__comment Hashtags separated by comma (eg. #funny,#home,#lovely)
-    input(type="submit", value="Edit Video")
+    input(type="submit", value="Save Edit")
   div.btn__groups
     a(href=`${video._id}/delete`)
       i.fas.fa-trash 

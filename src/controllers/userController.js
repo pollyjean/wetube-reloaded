@@ -48,6 +48,78 @@ export const postLogin = async (req, res) => {
   req.session.user = user;
   res.redirect("/");
 };
+export const startKakaoLogin = (req, res) => {
+  const baseUrl = "https://kauth.kakao.com/oauth/authorize";
+  const config = {
+    client_id: process.env.KA_CLIENT,
+    redirect_uri: res.locals.isHosting ? "https://skytube.conu.kr/users/kakao/finish" : "http://localhost:4000/users/kakao/finish",
+    response_type: "code",
+    scope: "openid,profile_nickname,profile_image,account_email",
+    nonce: process.env.KA_NONCE,
+  }
+  const params = new URLSearchParams(config).toString();
+  const authUrl = `${baseUrl}?${params}`;
+
+  return res.redirect(authUrl);
+}
+export const finishKakaoLogin = async (req, res) => {
+  const { query: { code } } = req;
+  const baseUrl = "https://kauth.kakao.com/oauth/token";
+  const config = {
+    grant_type: "authorization_code",
+    client_id: process.env.KA_CLIENT,
+    redirect_uri: res.locals.isHosting ? "https://skytube.conu.kr/users/kakao/finish" : "http://localhost:4000/users/kakao/finish",
+    code,
+    client_secret: process.env.KA_SECRET
+  }
+  const postParams = new URLSearchParams(config).toString();
+  const accessUrl = `${baseUrl}?${postParams}`;
+  const tokenRequest = await (
+    await fetch(accessUrl, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded;charset=utf-8"
+      }
+    })
+  ).json();
+
+  if ("access_token" in tokenRequest) {
+    const { access_token } = tokenRequest;
+    const apiUrl = "https://kapi.kakao.com";
+    const userData = await (
+      await fetch(`${apiUrl}/v2/user/me`, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          "Authorization": `Bearer ${access_token}`
+        }
+      })
+    ).json();
+    if (!(userData.kakao_account.is_email_valid) && !(userData.kakao_account.is_email_verified)) {
+      return res.redirect("/login");
+    }
+    console.log(userData.kakao_account.email);
+
+    let existUser = await User.findOne({ email: userData.kakao_account.email });
+
+    if (!existUser) {
+      existUser = await User.create({
+        email: userData.kakao_account.email,
+        avatarUrl: userData.properties.profile_image,
+        socialOnly: true,
+        username: userData.properties.nickname,
+        password: "",
+        fullname: userData.kakao_account.profile.nickname,
+        location: "",
+      });
+    }
+    req.session.loggedIn = true;
+    req.session.user = existUser;
+    return res.redirect("/");
+  } else {
+    return res.redirect("/login");
+  }
+};
+
 export const startGithubLogin = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
   const config = {
@@ -59,7 +131,7 @@ export const startGithubLogin = (req, res) => {
   const authUrl = `${baseUrl}?${params}`;
 
   return res.redirect(authUrl);
-};
+}
 export const finishGithubLogin = async (req, res) => {
   const baseUrl = "https://github.com/login/oauth/access_token";
   const config = {
@@ -100,9 +172,9 @@ export const finishGithubLogin = async (req, res) => {
     if (!emailObj) {
       return res.redirect("/login");
     }
-    let foundUser = await User.findOne({ email: emailObj.email });
-    if (!foundUser) {
-      foundUser = await User.create({
+    let existUser = await User.findOne({ email: emailObj.email });
+    if (!existUser) {
+      existUser = await User.create({
         email: emailObj.email,
         avatarUrl: userData.avatar_url,
         socialOnly: true,
@@ -113,7 +185,7 @@ export const finishGithubLogin = async (req, res) => {
       });
     }
     req.session.loggedIn = true;
-    req.session.user = foundUser;
+    req.session.user = existUser;
     return res.redirect("/");
   } else {
     return res.redirect("/login");
