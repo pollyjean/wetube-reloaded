@@ -5,7 +5,7 @@ header
       span=siteName
   div#search
     form(action="/search")
-      input(placeholder="Search by title",name="keyword", type="text", required, value="")
+      input(placeholder="Search by title",name="keyword", type="text", required, maxlength="40")
       button.fas.fa-search(type="submit")
   nav
     ul 

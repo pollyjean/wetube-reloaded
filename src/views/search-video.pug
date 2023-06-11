@@ -2,7 +2,7 @@ extends base
 include mixins/video
 
 block content
-  if videos
+  if videos.length > 0
     div.home__videoList
       each video in videos
         +video(video)
