@@ -4,15 +4,15 @@ block content
   form.form__inputPost(method="POST")
     if errorMessage
       p.error__message=errorMessage
-    label(for="joinEmail") Email
+    label(for="joinEmail") Email*
     input(id="joinEmail",name="email",type="email",required,placeholder="Enter Email")
-    label(for="joinUsername") User Name
+    label(for="joinUsername") User Name*
     input(id="joinUsername",name="username",type="text",required,placeholder="Enter User Name")
-    label(for="joinPassword") Password
+    label(for="joinPassword") Password*
     input(id="joinPassword",name="password",type="password",required,placeholder="Enter Password")
-    label(for="confirmPassword") Confirm Password
+    label(for="confirmPassword") Confirm Password*
     input(id="confirmPassword",name="confirmPassword",type="password",required,placeholder="Retype and Enter Password")
-    label(for="joinName") Full Name
+    label(for="joinName") Full Name*
     input(id="joinName",name="fullname",type="text", required,placeholder="Enter Full Name")
     label(for="joinLocation") Location
     input(id="joinLocation",name="location",type="text",placeholder="Enter Location")

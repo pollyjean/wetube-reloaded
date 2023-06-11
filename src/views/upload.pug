@@ -4,13 +4,13 @@ block content
   form.form__inputPost(method="POST",enctype="multipart/form-data")
     if errorMessage
       p #{errorMessage}
-    label(for="videoUpload") Video File Upload
+    label(for="videoUpload") Video File Upload*
     input(name="videoUpload",id="videoUpload",type="file",required,accept="video/*")
-    label(for="thumbUpload") Thumbnail Image Upload
+    label(for="thumbUpload") Thumbnail Image Upload*
     input(name="thumbUpload",id="thumbUpload",type="file",required,accept="image/*")
-    label(for="videoTitle")  Title
+    label(for="videoTitle")  Title*
     input(name="title",id="videoTitle",type="text",required,maxlength=80,placeholder="Enter Video Title")
-    label(for="videoDescription") Description
+    label(for="videoDescription") Description*
     input(name="desc",id="videoDescription",type="text",required,minlength=5,maxlength=255,placeholder="Enter Video Description")
     label(for="videoTags") Hashtags
     input(name="hashtags",id="videoTags",type="text",placeholder="Enter Tags")

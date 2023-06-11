@@ -2,7 +2,8 @@ mixin video(video)
   div.home__videoItem
     article
       if video.thumbUpload
-        a.home__videoThumb(href=`/videos/${video.id}`,style=`background-image:url(${video.thumbUpload})`)
+        a.home__videoThumb(href=`/videos/${video.id}`)
+          span(style=`background-image:url(${video.thumbUpload})`)
       else
         a.home__videoThumb(href=`/videos/${video.id}`)
       h4.home__videoTitle=video.title

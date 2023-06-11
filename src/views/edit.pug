@@ -3,9 +3,9 @@ extends base.pug
 block content
   h4 Update Video
   form.form__inputPost(method="POST")
-    label(for="updateTitle") Title
+    label(for="updateTitle") Title*
     input(name="title",id="updateTitle",placeholder="Enter Video Title", type="text", required, maxlength=80, value=video.title)
-    label(for="updateDesc") Description
+    label(for="updateDesc") Description*
     input(name="desc",id="updateDesc",placeholder="Enter Description", type="text", required, minlength=5, maxlength=255, value=video.desc)
     label(for="updateTags") Hashtags
     input(name="hashtags",id="updateTags",placeholder="Hashtags, separated by comma.", type="text", value=video.hashtags.join())
