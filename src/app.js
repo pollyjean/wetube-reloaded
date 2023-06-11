@@ -3,6 +3,8 @@ import morgan from "morgan";
 import session from "express-session";
 import flash from "express-flash";
 import cors from "cors";
+import path from "path";
+import favicon from "serve-favicon";
 import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
@@ -28,6 +30,7 @@ app.use(
 );
 app.use(flash());
 app.use(cors({ origin: true }));
+app.use(favicon(path.join(__dirname, "../", "favicon.ico")));
 app.use(localsMiddleware);
 app.use("/public", express.static("public"));
 app.use("/uploads", express.static("uploads"));
@@ -36,5 +39,6 @@ app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 app.use("/api", apiRouter);
+app.use((req, res) => { return res.status(404).render("404") });
 
 export default app;

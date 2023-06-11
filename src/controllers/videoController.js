@@ -113,7 +113,7 @@ export const searchVideo = async (req, res) => {
   const { query: { keyword } } = req;
   let videos = [];
   if (keyword.length > 40) {
-    return res.status.render("search-video", { pageTitle: `Search : ${keyword.substrong(0, 10)}...`, videos, errorMessage: "Search Keyword Too Long" });
+    return res.status(400).render("search-video", { pageTitle: `Search : ${keyword.substrong(0, 10)}...`, videos, errorMessage: "Search Keyword Too Long" });
   }
   if (keyword) {
     videos = await Video.find({
