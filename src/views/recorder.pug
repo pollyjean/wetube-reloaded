@@ -2,11 +2,21 @@ extends base.pug
 
 block content
   div#recorderContainer 
-    button#recorderBtn
-      i.fas.fa-camera
-      |  
-      span Start Recording
-    video#videoStreaming
+    div.recorder__inputGroup
+      button#recorderBtn
+        i.fas.fa-camera
+        |  
+        span Start Recording
+      button#recorderReload(aria-label="Reload")
+        i.fas.fa-redo
+      div.range
+        input#timerMinutes(type="range", name="timerMinutes", list="timerMarker", min="3", max="10",aria-label="Timer Range")
+        datalist#timerMarker
+          option(value="3") 3 Sec.
+          option(value="5") 5 Sec.
+          option(value="7") 7 Sec.
+          option(value="10") 10 Sec.
+    video#videoStreaming(type="video/webm")
   div.btn__groups.btn__hidden
     a(href="/videos/upload")
       i.fas.fa-cloud-upload-alt  

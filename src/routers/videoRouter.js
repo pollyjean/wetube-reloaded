@@ -14,3 +14,5 @@ videoRouter.get("/:id([0-9a-f]{24})/delete", protectorMiddleware, deleteVideo);
 videoRouter.get("/record", protectorMiddleware, getRecord)
 
 export default videoRouter;
+
+/** TODO: 태그 검색 */

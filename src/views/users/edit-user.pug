@@ -2,14 +2,17 @@ extends ../base
 
 block content
   if user.avatarUrl
-    div.avatar__frame
-      if user.avatarUrl.includes("uploads/avatars/")
-        img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
-      else
-        img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
+    section.profile__view
+      div.avatar__frame
+        if user.avatarUrl.includes("uploads/avatars/")
+          img(src=`/${user.avatarUrl}`,alt="Avatar Image",width="200")
+        else
+          img(src=`${user.avatarUrl}`,alt="Avatar Image",width="200")
   form.form__inputPost(method="POST",action="/users/edit/user-data",enctype="multipart/form-data")
     if errorMessage
       p.error__message=errorMessage
+    label(for="uploadAvatar") Avatar Image Upload
+    input(id="uploadAvatar",name="avatar",type="file",accept="image/*")
     label(for="editEmail") Email
     input(id="editEmail",name="email",type="email",required,value=user.email,placeholder="Enter Email")
     label(for="editUsername") User Name
@@ -18,8 +21,6 @@ block content
     input(id="editName",name="fullname",type="text",required,value=user.fullname, placeholder="Enter Your Full Name")
     label(for="editLocation") Location
     input(id="editLocation",name="location",type="text",value=user.location,placeholder="Enter Your Location")
-    label(for="uploadAvatar") Avatar Image Upload
-    input(id="uploadAvatar",name="avatar",type="file",accept="image/*")
     input(type="submit",value="Save Profile")
 
   if !user.socialOnly

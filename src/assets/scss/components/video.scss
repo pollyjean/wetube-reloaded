@@ -7,7 +7,7 @@
   article {
     width: 100%;
     .home__videoThumb {
-      height: 140px;
+      height: 160px;
       width: 100%;
       background: $white;
       border-radius: 10px;
@@ -16,14 +16,8 @@
     }
     .home__videoTitle {
       font-weight: bolder;
-      font-size: 1rem;
-      padding: $pad-sm 0;
-    }
-    .home__videoDesc {
-      padding-bottom: $pad-lg;
-      font-size: 0.85rem;
-      font-weight: lighter;
-      letter-spacing: -0.25px;
+      font-size: 1.1rem;
+      padding: $pad-md 0;
     }
     .home__videoHashtags {
       display: flex;
@@ -32,15 +26,16 @@
       gap: $pad-sm;
       padding-bottom: 10px;
       i {
-        font-family: $coding;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+        letter-spacing: -0.2px;
+        font-weight: normal;
       }
     }
     .home__videoMeta {
       width: 85%;
       font-size: 0.6rem;
       opacity: 0.6;
-      line-height: 1.2;
+      line-height: 1.35;
     }
   }
 }

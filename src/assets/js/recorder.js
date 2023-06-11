@@ -3,17 +3,24 @@ import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 const recorderContainer = document.getElementById("recorderContainer");
 const recorderBtn = document.getElementById("recorderBtn");
 const videoStreamingObj = document.getElementById("videoStreaming");
+const timerRangeInput = document.getElementById("timerMinutes");
+const recorderReloadBtn = document.getElementById("recorderReload");
+
+/** 쿠키에 볼륨 집어넣기 */
+const TIMER_IS = "timer=";
+const getTimerCookie = () => document.cookie.split("; ").find(word => word.startsWith(TIMER_IS)).split("=")[1];
 
 /** 변수들을 한군데 모음 */
 const recorder = {
   stream: undefined,
   record: null,
   url: null,
+  timer: (document.cookie.includes("timer=") ? getTimerCookie() : timerRangeInput.value)
 }
 const files = {
   input: "recording.webm",
   output: "output.mp4",
-  thumb: "thumbnail.jpg"
+  thumb: "thumbnail.jpg",
 }
 
 /** 레코딩 초기화
@@ -23,6 +30,7 @@ const files = {
  * 3. 에러는 로그에 표시 */
 const initRecorder = async () => {
   try {
+    timerRangeInput.value = recorder.timer;
     recorder.stream = await navigator.mediaDevices.getUserMedia({
       video: {
         width: 1280,
@@ -52,13 +60,14 @@ const makeDownload = (fileUrl, fileName) => {
 const setBtnDisable = (state = true) => {
   recorderBtn.disabled = state;
   recorderBtn.ariaDisabled = state;
+  timerRangeInput.disabled = state;
   state ? recorderBtn.classList.add("disable") : recorderBtn.classList.remove("disable");
 }
 const handleDownload = async () => {
   recorderBtn.removeEventListener("click", handleDownload);
   setBtnDisable(true);
   recorderBtn.querySelector("span").innerText = "Video Transcoding...";
-
+  recorderBtn.querySelector("i").classList = "fas fa-dice-d6";
   const ffmpeg = createFFmpeg({ log: true });
   await ffmpeg.load();
   recorderBtn.querySelector("span").innerText = "Video Transcoding..";
@@ -87,6 +96,7 @@ const handleDownload = async () => {
 
   initRecorder();
   recorderBtn.querySelector("span").innerText = "Retake Recording";
+  recorderBtn.querySelector("i").className = "fas fa-camera";
   recorderBtn.addEventListener("click", handleStartRecording);
   setBtnDisable(false);
 }
@@ -94,6 +104,7 @@ const handleStopRecording = () => {
   recorder.record.stop();
   setBtnDisable(false);
   recorderBtn.querySelector("span").innerText = "Download Recording";
+  recorderBtn.querySelector("i").className = "fas fa-cloud-download-alt";
   recorderBtn.removeEventListener("click", handleStopRecording);
   recorderBtn.addEventListener("click", handleDownload);
 }
@@ -101,14 +112,14 @@ const handleStopRecording = () => {
  * 기본값은 10(초)
  */
 const countRecording = (cnt = 10) => {
-  let count = cnt;
-  recorderBtn.querySelector("span").innerText = `Stop Recording...${count}`;
+  let count = Number(cnt) + 1;
+  recorderBtn.querySelector("span").innerText = `Count Recording...${count - 1}`;
   setBtnDisable(true);
   const timeout = setInterval(() => {
     count -= 1;
-    recorderBtn.querySelector("span").innerText = `Stop Recording...${count}`;
+    recorderBtn.querySelector("span").innerText = `Count Recording...${count - 1}`;
     if (count === 0) {
-      clearInterval(timeout)
+      clearInterval(timeout);
       handleStopRecording();
     }
   }, 1000);
@@ -126,11 +137,15 @@ const handleStartRecording = () => {
     videoStreamingObj.play();
   };
   recorder.record.start();
-  countRecording(6);
+  countRecording(recorder.timer);
+}
+const handleTimer = (event) => {
+  recorder.timer = event.target.value;
+  document.cookie = `${TIMER_IS}${event.target.value}`;
+
 }
 
 initRecorder();
 recorderBtn.addEventListener("click", handleStartRecording);
-
-/** TODO: 타이머의 시간을 조절하는 폼 인풋, 화면 루프를 멈출 수 있는 클릭 이벤트, 좀더 우아한 UI/UX, 상태에 따라 아이콘 바꾸기
- */
+timerRangeInput.addEventListener("change", handleTimer);
+recorderReloadBtn.addEventListener("click", () => window.location.reload());

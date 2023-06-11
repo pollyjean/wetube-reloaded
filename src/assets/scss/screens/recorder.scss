@@ -2,15 +2,61 @@
   display: flex;
   flex-direction: column;
   max-width: 768px;
-
   width: 100%;
-  button {
-    @include box-shape;
-    margin-bottom: $pad-sm;
-    width: 100%;
-    font-size: 0.9rem;
-    i {
-      color: $red;
+  padding: $pad-md;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  background-color: rgba($blue, 0.5);
+  .recorder__inputGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: $pad-lg;
+    margin-bottom: $pad-md;
+    @media (max-width:$screen-sm) {
+      flex-direction: column;
+    }
+    button {
+      @include box-shape;
+      padding: $pad-md $pad-lg;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      flex: 0 1 80%;
+      i {
+        color: $red;
+      }
+      &#recorderReload {
+        flex: 0 1 3rem;
+      }
+    }
+    .range {
+      position: relative;
+      flex: 1 0 12rem;
+      background-color: $light;
+      border-radius: 10px;
+      padding: $pad-sm;
+      @media (max-width:$screen-sm) {
+        max-height: 4rem;
+      }
+      input[type=range] {
+        width: 100%;
+        height: 5px;
+      }
+      datalist {
+        @include flex-c;
+        justify-content: space-between;
+        option {
+          font-size: 0.6rem;
+          padding-top: 0.6rem;
+          &:nth-child(2) {
+            position: absolute;
+            left: 28%; 
+          }
+          &:nth-child(3) {
+            position: absolute;
+            left: 50%; 
+          }
+        }
+      }
     }
   }
   video {

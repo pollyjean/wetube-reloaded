@@ -4,7 +4,7 @@ block content
   section.watch__detail
     figure#video__container(data-id=video._id)
       if video.thumbUpload
-        div.video__playCover(style=`background-image:url(${video.thumbUpload})`)
+        div.video__playCover
           i.far.fa-play-circle
       video
         if video.videoUpload.includes("uploads/video/")
@@ -27,8 +27,9 @@ block content
         button#fullscreen(aria-label="Enter Fullscreen")
           i.fas.fa-expand
     div.watch__smallText
-      small Uploaded by 
-        a(href=`/users/${video.owner._id}`)=video.owner.username
+      if video.owner
+        small Uploaded by 
+          a(href=`/users/${video.owner._id}`)=video.owner.username
       | &middot; 
       small=videoDate
       if video.meta.views === 1 
@@ -41,7 +42,7 @@ block content
         div.watch__detailHashtag
           each hashtag in video.hashtags
             i=hashtag + " "
-      if String(video.owner._id) === String(user._id)
+      if video.owner && (String(video.owner._id) === String(user._id))
         div.btn__groups
           a(href=`${video._id}/edit`)
             i.fas.fa-edit 
@@ -57,11 +58,11 @@ block content
         ul
           each comment in video.comments.reverse()
             li(data-id=comment._id)
-              if comment.owner.username
+              if comment.owner && comment.owner.username
                 span.watch__commentText=`${comment.owner.username} : ${comment.text}`
               else
                 span.watch__commentText=comment.text
-              if String(comment.owner._id) === String(user._id)
+              if comment.owner && (String(comment.owner._id) === String(user._id))
                 i.fas.fa-times.watch__commentClose
 block scripts
   script(src="/dist/js/videoPlayer.js") 

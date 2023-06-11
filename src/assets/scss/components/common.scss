@@ -40,7 +40,7 @@
 
 .btn__groups {
   @include flex-c;
-  margin: $pad-sm 0 $pad-lg;
+  margin: $pad-sm 0 $pad-sm;
   justify-content: center;
   gap: $pad-md;
   &.btn__hidden {
@@ -51,6 +51,9 @@
   }
   a {
     @include box-shape;
+  }
+  i {
+    color: $red;
   }
 }
 
