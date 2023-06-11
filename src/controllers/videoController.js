@@ -27,6 +27,7 @@ export const postUpload = async (req, res) => {
     const user = await User.findById(_id);
     user.videos.push(newVideo._id);
     user.save();
+    req.flash("info", "Video uploaded.");
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("upload", { pageTitle: "Video Upload", errorMessage: error });
@@ -89,7 +90,7 @@ export const postEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   await Video.findByIdAndUpdate(id, { title, desc, hashtags: Video.formatHashtags(hashtags) });
-  req.flash("success", "Changes saved");
+  req.flash("success", "Changes saved.");
   return res.redirect(`/videos/${id}`);
 };
 export const deleteVideo = async (req, res) => {
@@ -104,16 +105,18 @@ export const deleteVideo = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   if (String(video.owner._id) !== String(_id)) {
+    req.flash("error", "You cannot delete this video.")
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);
+  req.flash("info", "Video deleted.");
   return res.redirect("/");
 };
 export const searchVideo = async (req, res) => {
   const { query: { keyword } } = req;
   let videos = [];
   if (keyword.length > 40) {
-    return res.status(400).render("search-video", { pageTitle: `Search : ${keyword.substrong(0, 10)}...`, videos, errorMessage: "Search Keyword Too Long" });
+    return res.status(400).render("search-video", { pageTitle: `Search : ${keyword.substring(0, 10)}...`, videos, errorMessage: "Search Keyword Too Long" });
   }
   if (keyword) {
     videos = await Video.find({
@@ -135,7 +138,7 @@ export const registerView = async (req, res) => {
   const { params: { id } } = req;
   const video = await Video.findById(id);
   if (!video) {
-    req.flash("error", "Cannot found video")
+    req.flash("error", "Video not found.")
     return res.sendStatus(404);
   }
   video.meta.views += 1;
@@ -150,12 +153,12 @@ export const createComment = async (req, res) => {
   } = req
   const video = await Video.findById(id);
   if (!video) {
-    req.flash("error", "Video not found");
+    req.flash("error", "Video not found.");
     return res.sendStatus(404)
   }
   const userObj = await User.findById(user._id);
   if (!userObj) {
-    req.flash("error", "User not found");
+    req.flash("error", "User not found.");
     return res.sendStatus(404)
   }
   const comment = await Comment.create({

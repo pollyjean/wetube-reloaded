@@ -13,6 +13,7 @@ export const postJoin = async (req, res) => {
   }
   try {
     await User.create({ email, username, password, fullname, location });
+    req.flash("info", "User creation success.")
     return res.redirect("/login");
   } catch (error) {
     if (error.code === 11000) {
@@ -46,6 +47,7 @@ export const postLogin = async (req, res) => {
   }
   req.session.loggedIn = true;
   req.session.user = user;
+  req.flash("info", "Login complete.");
   res.redirect("/");
 };
 export const startKakaoLogin = (req, res) => {
@@ -95,7 +97,8 @@ export const finishKakaoLogin = async (req, res) => {
       })
     ).json();
     if (!(userData.kakao_account.is_email_valid) && !(userData.kakao_account.is_email_verified)) {
-      return res.redirect("/login");
+      req.flash("error", "Unauthorized Email address.");
+      return res.status(400).redirect("/login");
     }
     console.log(userData.kakao_account.email);
 
@@ -114,9 +117,12 @@ export const finishKakaoLogin = async (req, res) => {
     }
     req.session.loggedIn = true;
     req.session.user = existUser;
+
+    req.flash("info", "Login complete.");
     return res.redirect("/");
   } else {
-    return res.redirect("/login");
+    req.flash("error", "Login failed.");
+    return res.status(400).redirect("/login");
   }
 };
 
@@ -170,7 +176,8 @@ export const finishGithubLogin = async (req, res) => {
       (email) => email.primary === true && email.verified === true,
     );
     if (!emailObj) {
-      return res.redirect("/login");
+      req.flash("error", "Unauthorized Email address.")
+      return res.status(400).redirect("/login");
     }
     let existUser = await User.findOne({ email: emailObj.email });
     if (!existUser) {
@@ -186,13 +193,15 @@ export const finishGithubLogin = async (req, res) => {
     }
     req.session.loggedIn = true;
     req.session.user = existUser;
+    req.flash("info", "Login completed.");
     return res.redirect("/");
   } else {
-    return res.redirect("/login");
+    req.flash("error", "Login failed.");
+    return res.status(400).redirect("/login");
   }
 };
 export const logout = (req, res) => {
-  req.flash("info", "Bye Bye");
+  req.flash("info", "Bye Bye.");
   req.session.destroy();
   return res.redirect("/");
 };
@@ -222,6 +231,7 @@ export const postEditUser = async (req, res) => {
       { new: true },
     );
     req.session.user = updatedUser;
+    req.flash("info", "User updated.")
     return res.redirect(`/users/${_id}`);
   } catch (error) {
     if (error.code === 11000) {
