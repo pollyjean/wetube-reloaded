@@ -113,7 +113,13 @@ export const searchVideo = async (req, res) => {
   const { query: { keyword } } = req;
   let videos = [];
   if (keyword) {
-    videos = await Video.find({ title: { $regex: new RegExp(keyword, "i") } }).sort({ createdAt: "desc" }).populate("owner");
+    videos = await Video.find({
+      $or: [
+        { title: { $regex: new RegExp(keyword, "i") } },
+        { desc: { $regex: new RegExp(keyword, "i") } },
+        { hashtags: { $regex: new RegExp(keyword, "i") } },
+      ]
+    }).sort({ createdAt: "desc" }).populate("owner");
   }
   return res.render("search-video", { pageTitle: `Search : ${keyword}`, videos });
 };

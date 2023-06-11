@@ -2,7 +2,7 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) =>
-  res.render("join", { pageTitle: "Join Wetube" });
+  res.render("join", { pageTitle: "Join SkyTube" });
 export const postJoin = async (req, res) => {
   const { email, username, password, confirmPassword, fullname, location } =
     req.body;

@@ -3,9 +3,9 @@ doctype html
 html(lang="ko")
   head
     if pageTitle
-      title #{pageTitle} | SkyTube
+      title #{pageTitle} | #{siteName}
     else
-      title SkyTube
+      title=siteName
     meta(name="viewport",content="width=device-width, initial-scale=1")
 
     link(rel="apple-touch-icon" sizes="57x57" href="/public/apple-icon-57x57.png")
