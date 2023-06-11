@@ -1,15 +1,15 @@
 mixin video(video)
-  a.home__videoItem(href=`/videos/${video.id}`)
+  div.home__videoItem
     article
       if video.thumbUpload
-        div.home__videoThumb(style=`background-image:url(${video.thumbUpload})`)
+        a.home__videoThumb(href=`/videos/${video.id}`,style=`background-image:url(${video.thumbUpload})`)
       else
-        div.home__videoThumb
+        a.home__videoThumb(href=`/videos/${video.id}`)
       h4.home__videoTitle=video.title
       if video.hashtags[0].length !== 1
         div.home__videoHashtags
           each hashtag in video.hashtags
-            i=hashtag + " "
+            a(href=`/search/tag?hashtags=${encodeURIComponent(hashtag)}`)=hashtag
       div.home__videoMeta
         if video.owner 
           small.home__videoOwner #{video.owner.fullname}

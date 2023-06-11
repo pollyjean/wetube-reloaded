@@ -34,7 +34,7 @@ export const postLogin = async (req, res) => {
       .render("login", { pageTitle, errorMessage: "You have no account." });
   }
   if (!user.socialOnly) {
-    const match = bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
       return res
         .status(400)

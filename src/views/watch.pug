@@ -41,7 +41,7 @@ block content
       if video.hashtags[0].length !== 1
         div.watch__detailHashtag
           each hashtag in video.hashtags
-            i=hashtag + " "
+            a(href=`/search/tag?hashtags=${encodeURIComponent(hashtag)}`)=hashtag
       if video.owner && (String(video.owner._id) === String(user._id))
         div.btn__groups
           a(href=`${video._id}/edit`)

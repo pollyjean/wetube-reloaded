@@ -11,7 +11,7 @@ videoRouter.route("/upload").all(protectorMiddleware).get(getUpload)
     { name: "videoUpload", maxCount: 1 },
     { name: "thumbUpload", maxCount: 1 }]), postUpload);
 videoRouter.get("/:id([0-9a-f]{24})/delete", protectorMiddleware, deleteVideo);
-videoRouter.get("/record", protectorMiddleware, getRecord)
+videoRouter.get("/record", protectorMiddleware, getRecord);
 
 export default videoRouter;
 

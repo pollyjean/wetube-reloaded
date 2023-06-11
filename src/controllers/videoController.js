@@ -185,6 +185,16 @@ export const removeComment = async (req, res) => {
     return res.sendStatus(400);
   }
 }
+export const searchTagVideo = async (req, res) => {
+  const { query: { hashtags } } = req;
+  const pageTitle = `Tag Search : ${hashtags}`;
+  try {
+    const videos = await Video.find({ hashtags }).sort({ createdAt: "desc" }).populate("owner");
+    return res.render("search-video", { pageTitle, videos })
+  } catch (error) {
+    return res.status(400).render("search-video", { pageTitle, errorMessage: error })
+  }
+}
 
 /** TODO: 사용자 프로필에 댓글 단거 추가하기, 댓글에 사용자 이름, 날짜 추가, 좋아요 추가
  */
