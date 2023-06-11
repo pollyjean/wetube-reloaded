@@ -29,7 +29,7 @@ block content
     div.watch__smallText
       if video.owner
         small Uploaded by 
-          a(href=`/users/${video.owner._id}`)=video.owner.username
+          a(href=`/users/${video.owner._id}`)=video.owner.fullname
       | &middot; 
       small=videoDate
       if video.meta.views === 1 
